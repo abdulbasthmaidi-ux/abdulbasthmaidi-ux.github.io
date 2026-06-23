@@ -1,895 +1,1051 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الرقمي | المتجر الرقمي المتكامل</title>
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المتجر الرقمي الاحترافي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== RESET & BASE ===== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ====== BASE ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Tajawal', sans-serif;
-            background: #0a0a1a;
-            color: #e0e0e0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a1a; }
-        ::-webkit-scrollbar-thumb { background: #2a2a5a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3d3d8a; }
-
-        /* ===== COLOR SYSTEM ===== */
-        :root {
-            --primary: #6c5ce7;
-            --primary-dark: #5a4bd1;
-            --secondary: #00cec9;
-            --accent: #fd79a8;
-            --dark-bg: #0a0a1a;
-            --card-bg: #12122a;
-            --card-border: #1e1e4a;
-            --glass-bg: rgba(18, 18, 42, 0.85);
-            --glow: 0 0 30px rgba(108, 92, 231, 0.15);
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
+            background: #080b16;
+            color: #e8edf5;
+            line-height: 1.7;
         }
 
-        /* ===== ANIMATED BACKGROUND ===== */
-        .bg-animated {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -2;
-            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a1a 100%);
-        }
-        .bg-animated::before {
-            content: '';
-            position: absolute;
-            width: 600px; height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(108,92,231,0.08) 0%, transparent 70%);
-            top: -200px; right: -200px;
-            animation: floatGlow 15s ease-in-out infinite;
-        }
-        .bg-animated::after {
-            content: '';
-            position: absolute;
-            width: 500px; height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,206,201,0.06) 0%, transparent 70%);
-            bottom: -150px; left: -150px;
-            animation: floatGlow 20s ease-in-out infinite reverse;
-        }
-        @keyframes floatGlow {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, -30px) scale(1.1); }
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
-        /* ===== NAVBAR ===== */
-        .navbar {
-            background: rgba(10, 10, 26, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(108, 92, 231, 0.15);
-            padding: 15px 0;
-            transition: all 0.3s;
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-        .navbar-brand {
-            font-weight: 900;
-            font-size: 1.8rem;
-            color: #fff !important;
+        ::-webkit-scrollbar-track {
+            background: #10141f;
         }
-        .navbar-brand span {
-            color: var(--primary);
-        }
-        .navbar-brand small {
-            font-size: 0.7rem;
-            font-weight: 400;
-            color: var(--secondary);
-            display: block;
-            margin-top: -5px;
-        }
-        .nav-link {
-            color: #b0b0d0 !important;
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 8px 18px !important;
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
             border-radius: 10px;
-            transition: all 0.3s;
-            position: relative;
         }
-        .nav-link:hover,
-        .nav-link.active {
-            color: #fff !important;
-            background: rgba(108, 92, 231, 0.15);
-        }
-        .nav-link i { margin-left: 6px; }
 
-        /* ===== HERO ===== */
-        .hero {
-            min-height: 100vh;
+        /* ====== HEADER ====== */
+        .header {
+            background: #0c101c;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1a2040;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo .icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 20px;
+            color: #fff;
+        }
+        .logo .brand {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo .brand span {
+            color: #f59e0b;
+            -webkit-text-fill-color: #f59e0b;
+        }
+
+        .header-contact {
+            display: flex;
+            gap: 12px;
+        }
+        .header-contact a {
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-whatsapp {
+            background: #22c55e;
+            color: #fff !important;
+        }
+        .btn-whatsapp:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.25);
+        }
+        .btn-email {
+            background: #3b82f6;
+            color: #fff !important;
+        }
+        .btn-email:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+        }
+
+        /* ====== HERO ====== */
+        .hero {
             text-align: center;
-            padding: 120px 20px 60px;
+            padding: 90px 20px 70px;
+            background: radial-gradient(ellipse at 50% 0%, #111827 0%, #080b16 70%);
             position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
         }
         .hero-badge {
             display: inline-block;
-            background: rgba(108, 92, 231, 0.15);
-            border: 1px solid rgba(108, 92, 231, 0.3);
-            padding: 8px 24px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 6px 24px;
             border-radius: 50px;
-            font-size: 0.85rem;
-            color: var(--primary);
-            margin-bottom: 25px;
-            letter-spacing: 1px;
+            font-size: 13px;
+            color: #60a5fa;
+            margin-bottom: 20px;
+            position: relative;
         }
         .hero h1 {
-            font-size: 3.8rem;
+            font-size: 48px;
             font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 30%, var(--primary) 70%, var(--secondary) 100%);
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #e8edf5 20%, #60a5fa 50%, #a78bfa 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            position: relative;
         }
         .hero p {
-            font-size: 1.2rem;
-            color: #8888aa;
-            max-width: 650px;
-            margin: 0 auto 35px;
-            line-height: 1.8;
+            font-size: 18px;
+            color: #8892a8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
         }
         .hero-stats {
             display: flex;
-            gap: 40px;
             justify-content: center;
+            gap: 48px;
             flex-wrap: wrap;
-            margin-top: 40px;
+            position: relative;
         }
-        .hero-stat {
+        .hero-stats div {
             text-align: center;
         }
-        .hero-stat .num {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--secondary);
+        .hero-stats strong {
             display: block;
+            font-size: 30px;
+            color: #60a5fa;
         }
-        .hero-stat .label {
-            font-size: 0.85rem;
-            color: #6666aa;
+        .hero-stats span {
+            color: #64748b;
+            font-size: 13px;
         }
 
-        /* ===== SECTIONS ===== */
-        section { padding: 80px 0; }
-        .section-header {
-            text-align: center;
-            margin-bottom: 55px;
+        /* ====== SECTIONS ====== */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
-        .section-header h2 {
-            font-size: 2.4rem;
+
+        .section-title {
+            font-size: 30px;
             font-weight: 800;
-            color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            text-align: center;
         }
-        .section-header h2 i {
-            color: var(--primary);
-            margin-left: 10px;
+        .section-title .hl {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .section-header p {
-            color: #6666aa;
-            font-size: 1.05rem;
+        .section-sub {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 40px;
+            font-size: 15px;
         }
         .section-divider {
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-            margin: 15px auto 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            margin: 12px auto 36px;
+            border-radius: 4px;
         }
 
-        /* ===== CARDS ===== */
-        .service-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 35px 30px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            height: 100%;
-            position: relative;
-            overflow: hidden;
+        /* ====== CATEGORIES ====== */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .category-card {
+            background: #0f1422;
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid #1a2040;
+            transition: 0.3s;
             cursor: pointer;
+            position: relative;
         }
-        .service-card::before {
-            content: '';
+        .category-card:hover {
+            border-color: #3b82f6;
+            background: #111827;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.08);
+        }
+        .category-icon {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+        .category-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .category-card p {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .category-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            padding: 3px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* ====== PRODUCTS ====== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #0f1422;
+            border-radius: 16px;
+            padding: 26px 24px;
+            border: 1px solid #1a2040;
+            transition: 0.3s;
+        }
+        .product-card:hover {
+            border-color: #3b82f6;
+            background: #111827;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.06);
+        }
+
+        .product-tag {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.08);
+            color: #f59e0b;
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .product-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #f0f4ff;
+        }
+
+        .product-card .desc {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 14px;
+            min-height: 38px;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #60a5fa;
+            margin-bottom: 16px;
+        }
+        .product-price .currency {
+            font-size: 14px;
+            color: #8892a8;
+            font-weight: 500;
+        }
+
+        .btn-order {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .btn-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* ====== STEPS ====== */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .step {
+            background: #0f1422;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid #1a2040;
+            position: relative;
+        }
+        .step-num {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        .service-card:hover::before { opacity: 1; }
-        .service-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(108, 92, 231, 0.4);
-            box-shadow: var(--glow);
-        }
-        .service-icon {
-            width: 65px; height: 65px;
-            background: rgba(108, 92, 231, 0.12);
-            border-radius: 18px;
+            top: -12px;
+            right: 24px;
+            background: #3b82f6;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            transition: all 0.4s;
+            font-weight: 800;
+            font-size: 14px;
         }
-        .service-card:hover .service-icon {
-            background: var(--primary);
-            color: #fff;
-            transform: scale(1.05) rotate(-5deg);
-        }
-        .service-card h5 {
-            font-weight: 700;
-            color: #fff;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        .service-card .price-tag {
-            display: inline-block;
-            background: rgba(0, 206, 201, 0.12);
-            color: var(--secondary);
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin: 10px 0 12px;
-        }
-        .service-card p {
-            color: #8888aa;
-            font-size: 0.9rem;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-        .service-card .badge-feature {
-            display: inline-block;
-            background: rgba(253, 121, 168, 0.1);
-            color: var(--accent);
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            margin: 2px;
-        }
-        .service-card .btn-order {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            margin-top: 12px;
-        }
-        .service-card .btn-order:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(108, 92, 231, 0.4);
-        }
-
-        /* ===== FILE CHECKER SECTION ===== */
-        .checker-area {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 30px;
-        }
-        .checker-area textarea {
-            background: #0a0a1a;
-            border: 1px solid #2a2a5a;
-            border-radius: 12px;
-            color: #e0e0e0;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            direction: ltr;
-            min-height: 200px;
-        }
-        .checker-area textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(108, 92, 231, 0.15);
-            outline: none;
-        }
-        .checker-area .btn-check {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border: none;
-            padding: 12px 35px;
-            border-radius: 12px;
-            font-weight: 700;
-            color: #fff;
-            transition: all 0.3s;
-        }
-        .checker-area .btn-check:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
-        }
-        #checkerResult {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 12px;
-            display: none;
-        }
-        #checkerResult.show {
-            display: block;
-            animation: fadeInUp 0.4s;
-        }
-
-        /* ===== CONTACT ===== */
-        .contact-section {
-            background: var(--card-bg);
-            border-top: 1px solid var(--card-border);
-        }
-        .contact-info {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .contact-item {
-            text-align: center;
-            padding: 25px 35px;
-            background: rgba(108, 92, 231, 0.05);
-            border-radius: 16px;
-            border: 1px solid rgba(108, 92, 231, 0.1);
-            min-width: 220px;
-            transition: all 0.3s;
-        }
-        .contact-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-        }
-        .contact-item i {
-            font-size: 2rem;
-            color: var(--primary);
+        .step-icon {
+            font-size: 34px;
             margin-bottom: 12px;
         }
-        .contact-item h6 { color: #fff; font-weight: 700; }
-        .contact-item a {
-            color: #8888aa;
-            text-decoration: none;
-            transition: color 0.3s;
+        .step h4 {
+            font-size: 16px;
+            margin-bottom: 6px;
         }
-        .contact-item a:hover { color: var(--secondary); }
+        .step p {
+            color: #64748b;
+            font-size: 13px;
+        }
 
-        /* ===== FOOTER ===== */
-        footer {
-            background: #060612;
-            padding: 30px 0;
+        /* ====== SCANNER ====== */
+        .scanner-box {
+            background: #0f1422;
+            border-radius: 16px;
+            padding: 36px;
+            border: 1px solid #1a2040;
             text-align: center;
-            border-top: 1px solid rgba(108, 92, 231, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
         }
-        footer p { color: #5555aa; font-size: 0.9rem; margin: 0; }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .scanner-box input[type="file"] {
+            display: none;
         }
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== MODAL ===== */
-        .modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-        }
-        .modal-header {
-            border-bottom: 1px solid var(--card-border);
-        }
-        .modal-header .btn-close {
-            filter: invert(1);
-        }
-        .modal-body input,
-        .modal-body textarea,
-        .modal-body select {
-            background: #0a0a1a;
-            border: 1px solid #2a2a5a;
-            border-radius: 10px;
-            color: #e0e0e0;
-            padding: 12px 15px;
-        }
-        .modal-body input:focus,
-        .modal-body textarea:focus,
-        .modal-body select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 12px rgba(108, 92, 231, 0.15);
-            outline: none;
-        }
-        .modal-body label { color: #b0b0d0; font-weight: 500; }
-        .modal .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border: none;
-            border-radius: 10px;
-            padding: 12px 30px;
+        .scanner-label {
+            display: inline-block;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            border-radius: 12px;
             font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 16px;
+        }
+        .scanner-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(139, 92, 246, 0.3);
+        }
+        .scan-result {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            background: #080b16;
+            text-align: right;
+            display: none;
+            font-size: 13px;
+            border-right: 3px solid #3b82f6;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ====== CONTACT ====== */
+        .contact-section {
+            background: #0c101c;
+            border-top: 1px solid #1a2040;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .contact-section h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .contact-section h2 .hl {
+            color: #60a5fa;
+        }
+        .contact-section p {
+            color: #64748b;
+            margin-bottom: 28px;
+        }
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .contact-buttons a {
+            padding: 14px 34px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .contact-buttons a:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            background: #060912;
+            padding: 20px;
+            text-align: center;
+            color: #475569;
+            font-size: 13px;
+            border-top: 1px solid #0f1422;
+        }
+
+        /* ====== MODAL ====== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: #111827;
+            border-radius: 20px;
+            padding: 34px;
+            max-width: 440px;
+            width: 90%;
+            border: 1px solid #1a2040;
+            animation: modalIn 0.25s ease;
+        }
+        @keyframes modalIn {
+            from {
+                transform: scale(0.92);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .modal-box h3 {
+            font-size: 20px;
+            margin-bottom: 6px;
+            color: #f0f4ff;
+        }
+        .modal-box .product-name {
+            color: #60a5fa;
+            font-weight: 700;
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+        .modal-box .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 22px 0;
+        }
+        .modal-box .contact-options a {
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+        .modal-close {
+            background: transparent;
+            border: 1px solid #3b82f6;
+            color: #60a5fa;
+            padding: 10px 26px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .modal-close:hover {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        /* ====== RESPONSIVE ====== */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1rem; }
-            .hero-stats { gap: 20px; }
-            .section-header h2 { font-size: 1.8rem; }
-            .service-card { padding: 25px 20px; }
-            .checker-area { padding: 20px; }
-            .contact-item { min-width: 100%; }
+            .header {
+                padding: 14px 16px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+            .hero p {
+                font-size: 15px;
+            }
+            .section-title {
+                font-size: 22px;
+            }
+            .categories-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+            .modal-box {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- ===== ANIMATED BG ===== -->
-<div class="bg-animated"></div>
-
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <i class="fas fa-crown"></i> المتجر<span>الرقمي</span>
-            <small>سوق الخدمات الرقمية المتكامل</small>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link active" href="#hero"><i class="fas fa-home"></i> الرئيسية</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services"><i class="fas fa-cube"></i> الخدمات</a></li>
-                <li class="nav-item"><a class="nav-link" href="#templates"><i class="fas fa-puzzle-piece"></i> القوالب</a></li>
-                <li class="nav-item"><a class="nav-link" href="#analysis"><i class="fas fa-chart-bar"></i> تحليل البيانات</a></li>
-                <li class="nav-item"><a class="nav-link" href="#checker"><i class="fas fa-shield-alt"></i> فحص الملفات</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-headset"></i> تواصل معي</a></li>
-            </ul>
+    <!-- ====== HEADER ====== -->
+    <header class="header">
+        <div class="logo">
+            <span class="icon">🛒</span>
+            <span class="brand">المتجر <span>الرقمي</span></span>
         </div>
-    </div>
-</nav>
-
-<!-- ===== HERO ===== -->
-<section class="hero" id="hero">
-    <div class="container">
-        <div class="hero-badge">
-            <i class="fas fa-bolt"></i> أكثر من 150+ خدمة رقمية احترافية
+        <div class="header-contact" id="headerContact">
+            <a href="https://wa.me/966500000000?text=مرحباً%20أريد%20الاستفسار" class="btn-whatsapp" target="_blank">💬 واتساب</a>
+            <a href="mailto:admin@example.com?subject=استفسار%20عن%20المتجر" class="btn-email" target="_blank">✉️ البريد</a>
         </div>
-        <h1>المتجر الرقمي<br>المتكامل</h1>
-        <p>
-            أقدم لك خدمات رقمية احترافية في البرمجة، تطوير المواقع، الترجمة، تحليل البيانات،
-            والقوالب الجاهزة. اضغط على الخدمة المطلوبة وسأتواصل معك فوراً عبر واتساب أو الإيميل.
-        </p>
+    </header>
+
+    <!-- ====== HERO ====== -->
+    <section class="hero">
+        <div class="hero-badge">✦ أكثر من 50 خدمة رقمية احترافية</div>
+        <h1>سوق الخدمات الرقمية<br>المتكامل</h1>
+        <p>برامج، تطوير، قوالب، أكواد مصدرية، ترجمة، تحليل بيانات، فحص ملفات — كل ما تحتاجه في مكان واحد</p>
         <div class="hero-stats">
-            <div class="hero-stat">
-                <span class="num">150+</span>
-                <span class="label">خدمة رقمية</span>
-            </div>
-            <div class="hero-stat">
-                <span class="num">99%</span>
-                <span class="label">عملاء راضون</span>
-            </div>
-            <div class="hero-stat">
-                <span class="num">فوري</span>
-                <span class="label">تواصل مباشر</span>
-            </div>
+            <div><strong>+50</strong><span>خدمة متوفرة</span></div>
+            <div><strong>فوري</strong><span>تواصل مباشر</span></div>
+            <div><strong>٩٩٪</strong><span>عملاء راضون</span></div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ===== SERVICES ===== -->
-<section id="services">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <h2><i class="fas fa-cube"></i> الخدمات الرقمية</h2>
-            <p>جميع الخدمات التي تحتاجها في مكان واحد — بجودة احترافية وتسليم سريع</p>
-            <div class="section-divider"></div>
-        </div>
-        <div class="row g-4" id="servicesContainer">
-            <!-- تُعبأ بالجافاسكريبت -->
-        </div>
-    </div>
-</section>
+    <!-- ====== CATEGORIES ====== -->
+    <section class="section" id="categories">
+        <h2 class="section-title">الأقسام <span class="hl">الرئيسية</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">اضغط على القسم لتصفية الخدمات</p>
+        <div class="categories-grid" id="categoriesGrid"></div>
+    </section>
 
-<!-- ===== TEMPLATES ===== -->
-<section id="templates" style="background: rgba(18,18,42,0.3);">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <h2><i class="fas fa-puzzle-piece"></i> قوالب البرمجة</h2>
-            <p>قوالب جاهزة لجميع لغات البرمجة — وفر وقتك وابدأ مشروعك فوراً</p>
-            <div class="section-divider"></div>
-        </div>
-        <div class="row g-4" id="templatesContainer">
-            <!-- تُعبأ بالجافاسكريبت -->
-        </div>
-    </div>
-</section>
+    <!-- ====== PRODUCTS ====== -->
+    <section class="section" id="products">
+        <h2 class="section-title">الخدمات <span class="hl">المتوفرة</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">اختر الخدمة التي تريدها وسأتواصل معك فوراً</p>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
 
-<!-- ===== TRANSLATION ===== -->
-<section id="translation">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <h2><i class="fas fa-language"></i> الترجمة والتحرير</h2>
-            <p>ترجمة احترافية للملفات والكتب والمستندات بين جميع اللغات</p>
-            <div class="section-divider"></div>
-        </div>
-        <div class="row g-4" id="translationContainer">
-            <!-- تُعبأ بالجافاسكريبت -->
-        </div>
-    </div>
-</section>
-
-<!-- ===== ANALYSIS ===== -->
-<section id="analysis" style="background: rgba(18,18,42,0.3);">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <h2><i class="fas fa-chart-bar"></i> تحليل البيانات والتقارير</h2>
-            <p>تحليل متقدم للبيانات وإعداد تقارير احترافية للشركات والمؤسسات</p>
-            <div class="section-divider"></div>
-        </div>
-        <div class="row g-4" id="analysisContainer">
-            <!-- تُعبأ بالجافاسكريبت -->
-        </div>
-    </div>
-</section>
-
-<!-- ===== FILE CHECKER ===== -->
-<section id="checker">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <h2><i class="fas fa-shield-alt"></i> فحص الملفات البرمجية</h2>
-            <p>أداة فحص أولي لمشاريعك — ارفع كود JS, HTML, Python, PHP وغيرها</p>
-            <div class="section-divider"></div>
-        </div>
-        <div class="checker-area animate-on-scroll">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label">اختر نوع الفحص</label>
-                    <select class="form-select" id="checkerType">
-                        <option value="js">JavaScript</option>
-                        <option value="html">HTML</option>
-                        <option value="python">Python</option>
-                        <option value="php">PHP</option>
-                        <option value="sql">SQL</option>
-                        <option value="other">أخرى</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">بريدك للتواصل</label>
-                    <input type="email" class="form-control" id="checkerEmail" placeholder="example@email.com">
-                </div>
-                <div class="col-12">
-                    <label class="form-label">الصق الكود هنا</label>
-                    <textarea class="form-control" id="checkerCode" placeholder="// الصق الكود البرمجي هنا للفحص الأولي..."></textarea>
-                </div>
-                <div class="col-12 text-center">
-                    <button class="btn-check" onclick="checkCode()">
-                        <i class="fas fa-search"></i> فحص الكود
-                    </button>
-                </div>
+    <!-- ====== HOW IT WORKS ====== -->
+    <section class="section" id="how">
+        <h2 class="section-title">كيف <span class="hl">تطلب</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">ثلاث خطوات والخدمة جاهزة</p>
+        <div class="steps">
+            <div class="step">
+                <span class="step-num">١</span>
+                <div class="step-icon">👆</div>
+                <h4>اختر الخدمة</h4>
+                <p>تصفح الأقسام واختر ما تحتاجه</p>
             </div>
-            <div id="checkerResult"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== CONTACT ===== -->
-<section id="contact" class="contact-section">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <h2><i class="fas fa-headset"></i> تواصل معي مباشرة</h2>
-            <p>اضغط على أي منتج أو خدمة وسأتواصل معك فوراً عبر واتساب أو الإيميل</p>
-            <div class="section-divider"></div>
-        </div>
-        <div class="contact-info">
-            <div class="contact-item animate-on-scroll">
-                <i class="fab fa-whatsapp"></i>
-                <h6>واتساب</h6>
-                <a href="https://wa.me/966500000000" target="_blank">+966 50 000 0000</a>
+            <div class="step">
+                <span class="step-num">٢</span>
+                <div class="step-icon">💬</div>
+                <h4>تواصل مباشر</h4>
+                <p>اضغط على الخدمة ويتواصل معك واتساب</p>
             </div>
-            <div class="contact-item animate-on-scroll">
-                <i class="fas fa-envelope"></i>
-                <h6>البريد الإلكتروني</h6>
-                <a href="mailto:your@email.com">your@email.com</a>
-            </div>
-            <div class="contact-item animate-on-scroll">
-                <i class="fas fa-clock"></i>
-                <h6>وقت الرد</h6>
-                <span style="color:#8888aa;">خلال أقل من 30 دقيقة</span>
+            <div class="step">
+                <span class="step-num">٣</span>
+                <div class="step-icon">⚡</div>
+                <h4>تجهيز الطلب</h4>
+                <p>أرد عليك فوراً وأجهز الخدمة</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-    <div class="container">
-        <p>© 2026 المتجر الرقمي — جميع الحقوق محفوظة. نَفّذَهُ <i class="fas fa-heart" style="color: var(--accent);"></i> فريق البرمجة</p>
-    </div>
-</footer>
+    <!-- ====== FILE SCANNER ====== -->
+    <section class="section" id="scanner">
+        <h2 class="section-title">🔍 فحص <span class="hl">الملفات</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">ارفع ملف JS, HTML, PHP, Python أو أي كود للفحص الأمني</p>
+        <div class="scanner-box">
+            <label for="fileInput" class="scanner-label">📁 اختر ملف</label>
+            <input type="file" id="fileInput" accept=".js,.html,.htm,.php,.py,.java,.cpp,.c,.cs,.rb,.go,.ts,.jsx,.tsx,.vue,.svelte,.sql,.xml,.json,.yaml,.yml,.sh,.bash,.ps1,.bat,.css,.scss,.less" />
+            <div id="scanResult" class="scan-result"></div>
+        </div>
+    </section>
 
-<!-- ===== ORDER MODAL ===== -->
-<div class="modal fade" id="orderModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" style="color:#fff;"><i class="fas fa-shopping-cart"></i> <span id="modalTitle">طلب خدمة</span></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- ====== CONTACT ====== -->
+    <section class="contact-section" id="contact">
+        <h2>تواصل معي <span class="hl">مباشرة</span></h2>
+        <p>بدون تعقيد — اختر الخدمة وتواصل معي على الفور</p>
+        <div class="contact-buttons">
+            <a href="https://wa.me/966500000000?text=مرحباً%20أريد%20الاستفسار%20عن%20خدماتكم" class="btn-whatsapp" target="_blank" style="background:#22c55e;color:#fff;">💬 تواصل واتساب</a>
+            <a href="mailto:admin@example.com?subject=طلب%20خدمة%20رقمية" class="btn-email" target="_blank" style="background:#3b82f6;color:#fff;">✉️ راسلني عبر البريد</a>
+        </div>
+    </section>
+
+    <footer class="footer-bottom">
+        © 2026 المتجر الرقمي — تواصل مباشر بدون وسطاء
+    </footer>
+
+    <!-- ====== MODAL ====== -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <h3>✅ تم اختيار الخدمة</h3>
+            <p class="product-name" id="modalProductName">اسم الخدمة</p>
+            <p style="color:#64748b;font-size:14px;">اختر وسيلة التواصل وسأرد عليك فوراً:</p>
+            <div class="contact-options">
+                <a href="#" id="modalWhatsapp" target="_blank" class="btn-whatsapp" style="background:#22c55e;color:#fff;text-align:center;">
+                    💬 أرسل عبر واتساب
+                </a>
+                <a href="#" id="modalEmail" target="_blank" class="btn-email" style="background:#3b82f6;color:#fff;text-align:center;">
+                    ✉️ أرسل عبر البريد
+                </a>
             </div>
-            <div class="modal-body">
-                <form id="orderForm" onsubmit="submitOrder(event)">
-                    <input type="hidden" id="orderService" value="">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label>اسمك الكامل</label>
-                            <input type="text" class="form-control" id="orderName" required>
+            <button class="modal-close" onclick="closeModal()">إلغاء</button>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // DATA
+        // =============================================
+        const categories = [{
+            id: 'software',
+            icon: '💻',
+            title: 'برامج وتطبيقات',
+            desc: 'برامج سطح مكتب وتطبيقات موبايل'
+        }, {
+            id: 'dev',
+            icon: '⚙️',
+            title: 'تطوير مخصص',
+            desc: 'برمجة أنظمة حسب طلبك'
+        }, {
+            id: 'templates',
+            icon: '🎨',
+            title: 'قوالب برمجية',
+            desc: 'HTML, CSS, JS, React, Vue, Angular'
+        }, {
+            id: 'source',
+            icon: '📦',
+            title: 'أكواد ومشاريع',
+            desc: 'جميع لغات البرمجة — مشاريع كاملة'
+        }, {
+            id: 'translate',
+            icon: '🌐',
+            title: 'ترجمة احترافية',
+            desc: 'ملفات، كتب، وثائق، مواقع'
+        }, {
+            id: 'analytics',
+            icon: '📊',
+            title: 'تحليل البيانات',
+            desc: 'تقارير للشركات وداشبوردات'
+        }, {
+            id: 'security',
+            icon: '🔒',
+            title: 'فحص الكود والملفات',
+            desc: 'فحص أمني لجميع اللغات'
+        }];
+
+        const products = [{
+            id: 1,
+            category: 'software',
+            tag: 'برامج',
+            name: 'برنامج إدارة المشاريع',
+            desc: 'نظام كامل لإدارة المهام والفريق',
+            price: '150'
+        }, {
+            id: 2,
+            category: 'software',
+            tag: 'برامج',
+            name: 'برنامج محاسبة متكامل',
+            desc: 'فواتير، مخزون، عملاء — واجهة عربية',
+            price: '200'
+        }, {
+            id: 3,
+            category: 'dev',
+            tag: 'تطوير',
+            name: 'نظام مخصص حسب الطلب',
+            desc: 'أي نظام تريده — ويب أو تطبيق',
+            price: 'من 300'
+        }, {
+            id: 4,
+            category: 'dev',
+            tag: 'تطوير',
+            name: 'تطوير API و Backend',
+            desc: 'Node.js, Python, PHP — REST API',
+            price: 'من 250'
+        }, {
+            id: 5,
+            category: 'templates',
+            tag: 'قوالب',
+            name: 'قالب متجر إلكتروني',
+            desc: 'HTML/CSS/JS — متجاوب وجاهز',
+            price: '75'
+        }, {
+            id: 6,
+            category: 'templates',
+            tag: 'قوالب',
+            name: 'قالب لوحة تحكم Admin',
+            desc: 'داشبورد احترافي مع جميع المكونات',
+            price: '85'
+        }, {
+            id: 7,
+            category: 'source',
+            tag: 'أكواد',
+            name: 'نظام تسجيل دخول كامل',
+            desc: 'PHP + MySQL — صلاحيات وأمان',
+            price: '40'
+        }, {
+            id: 8,
+            category: 'source',
+            tag: 'أكواد',
+            name: 'بوت تيليجرام متكامل',
+            desc: 'Python — مع قاعدة بيانات',
+            price: '60'
+        }, {
+            id: 9,
+            category: 'source',
+            tag: 'أكواد',
+            name: 'تطبيق React Native',
+            desc: 'كود كامل + واجهة مستخدم احترافية',
+            price: '120'
+        }, {
+            id: 10,
+            category: 'translate',
+            tag: 'ترجمة',
+            name: 'ترجمة وثائق PDF',
+            desc: 'ترجمة احترافية لأي لغة',
+            price: 'حسب الصفحات'
+        }, {
+            id: 11,
+            category: 'translate',
+            tag: 'ترجمة',
+            name: 'ترجمة مواقع وتطبيقات',
+            desc: 'ترجمة واجهات ومحتوى كامل',
+            price: 'من 100'
+        }, {
+            id: 12,
+            category: 'analytics',
+            tag: 'تحليل',
+            name: 'تقرير تحليل بيانات شامل',
+            desc: 'رسوم بيانية وتوصيات لشركتك',
+            price: 'من 200'
+        }, {
+            id: 13,
+            category: 'analytics',
+            tag: 'تحليل',
+            name: 'داشبورد تفاعلي للشركات',
+            desc: 'لوحة تحكم تحليلات حية',
+            price: 'من 300'
+        }, {
+            id: 14,
+            category: 'security',
+            tag: 'فحص',
+            name: 'فحص أمني للموقع',
+            desc: 'فحص شامل للثغرات + تقرير',
+            price: 'من 150'
+        }, {
+            id: 15,
+            category: 'security',
+            tag: 'فحص',
+            name: 'فحص ملفات (JS/HTML/PHP)',
+            desc: 'كشف الثغرات والكود الخبيث',
+            price: '25 - 100'
+        }];
+
+        // =============================================
+        // CONFIG — غير الرقم والبريد هنا
+        // =============================================
+        const CONFIG = {
+            whatsapp: '966500000000',
+            email: 'admin@example.com'
+        };
+
+        // =============================================
+        // RENDER
+        // =============================================
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = categories.map(c => `
+                        <div class="category-card" onclick="filterProducts('${c.id}')">
+                            <div class="category-icon">${c.icon}</div>
+                            <h4>${c.title}</h4>
+                            <p>${c.desc}</p>
+                            <span class="category-badge">${products.filter(p => p.category === c.id).length} خدمات</span>
                         </div>
-                        <div class="col-md-6">
-                            <label>طريقة التواصل المفضلة</label>
-                            <select class="form-select" id="orderContactMethod" onchange="toggleContactField()">
-                                <option value="whatsapp">واتساب</option>
-                                <option value="email">بريد إلكتروني</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6" id="whatsappField">
-                            <label>رقم واتساب</label>
-                            <input type="text" class="form-control" id="orderPhone" placeholder="+966 5x xxx xxxx">
-                        </div>
-                        <div class="col-md-6" id="emailField" style="display:none;">
-                            <label>البريد الإلكتروني</label>
-                            <input type="email" class="form-control" id="orderEmail" placeholder="example@email.com">
-                        </div>
-                        <div class="col-12">
-                            <label>تفاصيل الطلب</label>
-                            <textarea class="form-control" id="orderDetails" rows="4" placeholder="اشرح لي ما تحتاجه بالتفصيل..."></textarea>
-                        </div>
-                        <div class="col-12">
-                            <label>هل لديك ملفات مرفقة؟ (اختياري)</label>
-                            <input type="file" class="form-control" id="orderFile" multiple>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                <button type="submit" form="orderForm" class="btn btn-primary">
-                    <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ===== BOOTSTRAP JS ===== -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    // ============================================================
-    //  DATA — جميع الخدمات والمنتجات
-    // ============================================================
-    const DATA = {
-        services: [
-            { id: 's1', icon: 'fas fa-globe', title: 'تطوير مواقع (HTML/CSS/JS)', price: '85$', desc: 'مواقع احترافية متجاوبة مع جميع الأجهزة، تصميم عصري وسرعة فائقة.', features: ['تصميم متجاوب', 'SEO أساسي', '5 صفحات'] },
-            { id: 's2', icon: 'fab fa-react', title: 'تطوير React.js', price: '150$', desc: 'تطبيقات ويب تفاعلية باستخدام React.js مع أفضل الممارسات.', features: ['React Hooks', 'State Management', 'API Integration'] },
-            { id: 's3', icon: 'fab fa-python', title: 'تطوير Python (Web/Data)', price: '120$', desc: 'حلول بايثون لتطوير الويب وتحليل البيانات والأتمتة.', features: ['Django/Flask', 'Web Scraping', 'أتمتة المهام'] },
-            { id: 's4', icon: 'fas fa-mobile-alt', title: 'تطوير تطبيقات موبايل', price: '200$', desc: 'تطبيقات أندرويد و iOS باستخدام Flutter أو React Native.', features: ['واجهة عصرية', 'Firebase', 'متجر إلكتروني'] },
-            { id: 's5', icon: 'fas fa-database', title: 'قواعد بيانات SQL/NoSQL', price: '90$', desc: 'تصميم وبرمجة قواعد بيانات متكاملة تناسب مشروعك.', features: ['MySQL/PostgreSQL', 'MongoDB', 'تحسين استعلامات'] },
-            { id: 's6', icon: 'fas fa-code-branch', title: 'Git & DevOps', price: '100$', desc: 'إعداد مستودعات Git، CI/CD pipelines، ونشر المشاريع.', features: ['GitHub/GitLab', 'Docker', 'CI/CD'] },
-            { id: 's7', icon: 'fas fa-shield-alt', title: 'اختبار الاختراق (Pentest)', price: '250$', desc: 'اختبار أمني شامل لتطبيقات الويب والمواقع.', features: ['OWASP Top 10', 'تقرير مفصل', 'توصيات أمنية'] },
-            { id: 's8', icon: 'fas fa-plug', title: 'API Integration', price: '80$', desc: 'ربط تطبيقاتك مع APIs خارجية (دفع، خرائط، تواصل اجتماعي).', features: ['REST/GraphQL', 'توثيق', 'اختبار'] },
-        ],
-        templates: [
-            { id: 't1', icon: 'fas fa-palette', title: 'قالب موقع شخصي', price: '35$', desc: 'قالب HTML/CSS/JS عصري للمطورين والمصممين.', features: ['متجاوب', 'داكن/فاتح', 'سهل التعديل'] },
-            { id: 't2', icon: 'fas fa-store', title: 'قالب متجر إلكتروني', price: '55$', desc: 'قالب متكامل للمتاجر الإلكترونية مع سلة مشتريات.', features: ['Bootstrap 5', 'Font Awesome', 'صفحة منتجات'] },
-            { id: 't3', icon: 'fas fa-laptop-code', title: 'قالب لوحة تحكم (Admin)', price: '45$', desc: 'لوحة تحكم إدارية بإحصائيات ورسوم بيانية.', features: ['Chart.js', 'جدول بيانات', 'قائمة جانبية'] },
-            { id: 't4', icon: 'fab fa-vuejs', title: 'قالب Vue.js 3', price: '65$', desc: 'مشروع Vue 3 مع Composition API و Pinia.', features: ['Vue Router', 'Pinia', 'مكونات جاهزة'] },
-            { id: 't5', icon: 'fab fa-laravel', title: 'قالب Laravel + Dashboard', price: '75$', desc: 'نظام متكامل بلارافيل مع لوحة تحكم ومصادقة.', features: ['Auth', 'Admin Panel', 'API'] },
-            { id: 't6', icon: 'fas fa-robot', title: 'قالب بوت تليجرام', price: '40$', desc: 'بوت تليجرام متكامل بلغة بايثون (python-telegram-bot).', features: ['أوامر مخصصة', 'قاعدة بيانات', 'نشر سريع'] },
-        ],
-        translation: [
-            { id: 'tr1', icon: 'fas fa-file-alt', title: 'ترجمة ملفات (PDF/Word)', price: '30$', desc: 'ترجمة احترافية للملفات والمستندات بأي حجم.', features: ['En/Ar', 'دقة 99%', 'تسليم 24h'] },
-            { id: 'tr2', icon: 'fas fa-book', title: 'ترجمة كتب كاملة', price: '100$', desc: 'ترجمة متخصصة للكتب بمختلف المجالات.', features: ['أكاديمي/تجاري', 'مراجعة', 'تنسيق كامل'] },
-            { id: 'tr3', icon: 'fas fa-globe', title: 'ترجمة مواقع إلكترونية', price: '70$', desc: 'ترجمة واجهات المواقع والتطبيقات مع الحفاظ على المصطلحات.', features: ['RTL/LTR', 'SEO', 'مصطلحات تقنية'] },
-            { id: 'tr4', icon: 'fas fa-video', title: 'ترجمة فيديوهات (ترجمة نصية)', price: '50$', desc: 'ترجمة نصوص الفيديوهات والدروس التعليمية.', features: ['SRT/VTT', 'توقيت دقيق', 'تصدير جاهز'] },
-        ],
-        analysis: [
-            { id: 'a1', icon: 'fas fa-chart-pie', title: 'تقرير بيانات شامل', price: '120$', desc: 'تحليل كامل لبيانات شركتك مع رسوم بيانية وتوصيات.', features: ['Power BI', 'تصور متقدم', 'تقرير PDF'] },
-            { id: 'a2', icon: 'fas fa-robot', title: 'نموذج تعلم آلة (ML)', price: '200$', desc: 'بناء وتدريب نموذج ML مخصص لبياناتك.', features: ['Python/Scikit', 'تقييم', 'نشر API'] },
-            { id: 'a3', icon: 'fas fa-file-excel', title: 'تقارير Excel متقدمة', price: '60$', desc: 'تقارير احترافية مع جداول ديناميكية ومخططات.', features: ['Pivot Tables', 'Power Query', 'أتمتة'] },
-            { id: 'a4', icon: 'fas fa-search-dollar', title: 'تحليل السوق والمنافسين', price: '150$', desc: 'دراسة سوقية كاملة مع تحليل المنافسين والفرص.', features: ['SWOT', 'Porter 5 Forces', 'توصيات'] },
-        ]
-    };
-
-    // ============================================================
-    //  RENDER CARDS
-    // ============================================================
-    function renderCards(containerId, items, section) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = items.map(item => `
-            <div class="col-lg-4 col-md-6">
-                <div class="service-card animate-on-scroll" onclick="openOrder('${item.title}', '${item.price}', '${section}')">
-                    <div class="service-icon"><i class="${item.icon}"></i></div>
-                    <h5>${item.title}</h5>
-                    <div class="price-tag">${item.price}</div>
-                    <p>${item.desc}</p>
-                    <div>
-                        ${item.features.map(f => `<span class="badge-feature"><i class="fas fa-check"></i> ${f}</span>`).join(' ')}
-                    </div>
-                    <button class="btn-order" onclick="event.stopPropagation(); openOrder('${item.title}', '${item.price}', '${section}')">
-                        <i class="fas fa-shopping-cart"></i> أطلب الخدمة
-                    </button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    renderCards('servicesContainer', DATA.services, 'services');
-    renderCards('templatesContainer', DATA.templates, 'templates');
-    renderCards('translationContainer', DATA.translation, 'translation');
-    renderCards('analysisContainer', DATA.analysis, 'analysis');
-
-    // ============================================================
-    //  ORDER MODAL
-    // ============================================================
-    function openOrder(title, price, section) {
-        document.getElementById('modalTitle').textContent = `${title} — ${price}`;
-        document.getElementById('orderService').value = title;
-        const modal = new bootstrap.Modal(document.getElementById('orderModal'));
-        modal.show();
-    }
-
-    function toggleContactField() {
-        const method = document.getElementById('orderContactMethod').value;
-        document.getElementById('whatsappField').style.display = method === 'whatsapp' ? 'block' : 'none';
-        document.getElementById('emailField').style.display = method === 'email' ? 'block' : 'none';
-    }
-
-    function submitOrder(e) {
-        e.preventDefault();
-        const service = document.getElementById('orderService').value;
-        const name = document.getElementById('orderName').value;
-        const method = document.getElementById('orderContactMethod').value;
-        const phone = document.getElementById('orderPhone').value;
-        const email = document.getElementById('orderEmail').value;
-        const details = document.getElementById('orderDetails').value;
-
-        // تكوين رسالة واتساب (الطريقة الافتراضية)
-        let msg = `🛒 *طلب خدمة جديدة*%0A%0A`;
-        msg += `*الخدمة:* ${service}%0A`;
-        msg += `*الاسم:* ${name}%0A`;
-        if (method === 'whatsapp') msg += `*رقم واتساب:* ${phone}%0A`;
-        else msg += `*البريد:* ${email}%0A`;
-        msg += `*التفاصيل:* ${details}%0A%0A`;
-        msg += `من فضلك أرسل لي تفاصيل الطلب 🙏`;
-
-        // رقم الواتساب الافتراضي (غيّره لرقمك)
-        const WHATSAPP_NUMBER = '966500000000';
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
-
-        // إقفال المودال
-        bootstrap.Modal.getInstance(document.getElementById('orderModal')).hide();
-        document.getElementById('orderForm').reset();
-    }
-
-    // ============================================================
-    //  FILE CHECKER
-    // ============================================================
-    function checkCode() {
-        const type = document.getElementById('checkerType').value;
-        const code = document.getElementById('checkerCode').value.trim();
-        const email = document.getElementById('checkerEmail').value.trim();
-        const resultDiv = document.getElementById('checkerResult');
-
-        if (!code) {
-            resultDiv.className = 'alert alert-danger show';
-            resultDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> الرجاء لصق الكود للفحص.';
-            resultDiv.style.display = 'block';
-            return;
+                    `).join('');
         }
 
-        // فحص أساسي
-        let issues = [];
-        let score = 100;
+        function renderProducts(filter) {
+            const grid = document.getElementById('productsGrid');
+            let filtered = filter ? products.filter(p => p.category === filter) : products;
 
-        if (type === 'js' || type === 'html') {
-            if (code.includes('eval(')) { issues.push('استخدام eval() يشكل خطر أمني'); score -= 15; }
-            if (code.includes('document.write')) { issues.push('استخدام document.write غير موصى به'); score -= 10; }
-            if (code.includes('innerHTML') && type === 'js') { issues.push('innerHTML قد يسبب XSS — استخدم textContent بدلاً'); score -= 10; }
-            if (code.includes('alert(')) { issues.push('استخدام alert() في الإنتاج غير مناسب'); score -= 5; }
-            if (code.includes('console.log')) { issues.push('يوجد console.log — ازلهم قبل النشر'); score -= 5; }
-            if (code.includes('http://') && !code.includes('https://')) { issues.push('روابط غير آمنة (http) — استخدم https'); score -= 10; }
-            if (code.includes('password') || code.includes('apiKey') || code.includes('secret')) { issues.push('⚠️可能存在密钥或密码 في الكود!'); score -= 20; }
-            if (code.includes('//')) { /* تعليقات عادية لا مشكلة */ }
-        }
-
-        if (type === 'python') {
-            if (code.includes('eval(') || code.includes('exec(')) { issues.push('eval/exec خطر أمني كبير'); score -= 20; }
-            if (code.includes('pickle.load')) { issues.push('pickle قد يكون غير آمن مع بيانات غير موثوقة'); score -= 10; }
-            if (code.includes('os.system(')) { issues.push('استخدم subprocess بدلاً من os.system'); score -= 10; }
-            if (code.includes('input(')) { issues.push('input() يتطلب معالجة أمان'); score -= 5; }
-        }
-
-        if (type === 'php') {
-            if (code.includes('mysql_')) { issues.push('mysql_* مهمل — استخدم MySQLi أو PDO'); score -= 15; }
-            if (code.includes('$_REQUEST')) { issues.push('$_REQUEST غير آمن — استخدم $_POST أو $_GET'); score -= 10; }
-            if (code.includes('extract(')) { issues.push('extract() يسبب ثغرات'); score -= 15; }
-            if (code.includes('include(') && (code.includes('$_GET') || code.includes('$_POST'))) { issues.push('⚠️ File Inclusion خطر!'); score -= 25; }
-        }
-
-        if (type === 'sql') {
-            if (!code.toLowerCase().includes('where')) { issues.push('استعلام بدون WHERE — قد يكون خطر'); score -= 10; }
-            if (code.includes('DROP') || code.includes('TRUNCATE')) { issues.push('⚠️ أوامر حذف في الكود!'); score -= 20; }
-            if (code.includes('*') && code.toLowerCase().includes('select')) { issues.push('SELECT * غير موصى به في الإنتاج'); score -= 5; }
-        }
-
-        // عام
-        if (code.length < 10) { issues.push('الكود قصير جداً'); score -= 5; }
-        if (code.includes('TODO') || code.includes('FIXME')) { issues.push('يوجد مهام ناقصة (TODO/FIXME)'); score -= 5; }
-
-        if (score < 0) score = 0;
-
-        let html = ` <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 style="color:#fff;margin:0;"><i class="fas fa-shield-alt"></i> نتيجة الفحص</h5>
-                        <span style="font-size:1.8rem;font-weight:900;color:${score >= 80 ? '#00cec9' : score >= 50 ? '#fdcb6e' : '#fd79a8'}">${score}%</span>
-                    </div>`;
-
-        if (issues.length > 0) {
-            html += `<ul style="text-align:right;padding-right:20px;margin-bottom:15px;">`;
-            issues.forEach(issue => { html += `<li style="color:#fdcb6e;margin-bottom:5px;">⚠️ ${issue}</li>`; });
-            html += `</ul>`;
-        } else {
-            html += `<p style="color:#00cec9;"><i class="fas fa-check-circle"></i> لا توجد مشاكل واضحة! الكود يبدو سليماً.</p>`;
-        }
-
-        html += `<hr style="border-color:#2a2a5a;">
-                 <p style="color:#8888aa;font-size:0.85rem;">
-                    <i class="fas fa-info-circle"></i> هذا فحص أساسي — للفحص الاحترافي الشامل، 
-                    <button class="btn btn-sm btn-outline-primary" onclick="openOrder('فحص كود احترافي (${type.toUpperCase()})', 'من 50\$', 'checker')" style="padding:2px 12px;">أطلب فحصاً شاملاً</button>
-                 </p>`;
-
-        resultDiv.className = 'alert show';
-        resultDiv.style.cssText = `background:rgba(108,92,231,0.08);border:1px solid rgba(108,92,231,0.2);border-radius:16px;padding:20px;display:block;animation:fadeInUp 0.4s;`;
-        resultDiv.innerHTML = html;
-        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    // ============================================================
-    //  SCROLL ANIMATION (Intersection Observer)
-    // ============================================================
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">
+                            لا توجد خدمات في هذا القسم حالياً
+                        </div>`;
+                return;
             }
-        });
-    }, { threshold: 0.1 });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-    });
-</script>
+            grid.innerHTML = filtered.map(p => `
+                        <div class="product-card">
+                            <span class="product-tag">${p.tag}</span>
+                            <h4>${p.name}</h4>
+                            <p class="desc">${p.desc}</p>
+                            <div class="product-price">$${p.price} <span class="currency">دولار</span></div>
+                            <button class="btn-order" onclick="openOrderModal(${p.id})">
+                                🛒 أطلب الخدمة
+                            </button>
+                        </div>
+                    `).join('');
+        }
+
+        function filterProducts(categoryId) {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            renderProducts(categoryId);
+            // أضف كلاس نشط للقسم المختار
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.style.borderColor = '#1a2040';
+                card.style.background = '#0f1422';
+            });
+            // Highlight the selected
+            const cards = document.querySelectorAll('.category-card');
+            categories.forEach((c, i) => {
+                if (c.id === categoryId && cards[i]) {
+                    cards[i].style.borderColor = '#3b82f6';
+                    cards[i].style.background = '#111827';
+                }
+            });
+            // زر إظهار الكل
+            showAllBtn();
+        }
+
+        function showAllProducts() {
+            renderProducts(null);
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.style.borderColor = '#1a2040';
+                card.style.background = '#0f1422';
+            });
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            // حذف زر إظهار الكل
+            const btn = document.getElementById('showAllBtn');
+            if (btn) btn.remove();
+        }
+
+        function showAllBtn() {
+            const old = document.getElementById('showAllBtn');
+            if (old) old.remove();
+            const btn = document.createElement('div');
+            btn.id = 'showAllBtn';
+            btn.style.textAlign = 'center';
+            btn.style.marginTop = '20px';
+            btn.innerHTML =
+                `<button onclick="showAllProducts()" style="background:transparent;border:1px solid #3b82f6;color:#60a5fa;padding:10px 30px;border-radius:10px;cursor:pointer;font-weight:600;font-size:14px;">
+                            ✕ عرض جميع الخدمات
+                        </button>`;
+            document.getElementById('products').appendChild(btn);
+        }
+
+        // =============================================
+        // MODAL
+        // =============================================
+        function openOrderModal(productId) {
+            const p = products.find(x => x.id === productId);
+            if (!p) return;
+
+            document.getElementById('modalProductName').textContent = `${p.name} — $${p.price} دولار`;
+
+            const msg = encodeURIComponent(
+                `مرحباً 👋\n\nأريد طلب:\n📌 ${p.name}\n💰 $${p.price} دولار\n📝 ${p.desc}\n\nأرجو التواصل معي للتجهيز.`
+            );
+
+            document.getElementById('modalWhatsapp').href = `https://wa.me/${CONFIG.whatsapp}?text=${msg}`;
+            document.getElementById('modalEmail').href = `mailto:${CONFIG.email}?subject=طلب: ${p.name}&body=${msg}`;
+
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // =============================================
+        // FILE SCANNER
+        // =============================================
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const resultDiv = document.getElementById('scanResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '⏳ جاري الفحص...';
+
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                resultDiv.innerHTML = scanCode(ev.target.result, file.name);
+            };
+            reader.readAsText(file);
+        });
+
+        function scanCode(code, filename) {
+            const patterns = [
+                { r: /eval\s*\(/i, d: 'استخدام eval() — تنفيذ كود ديناميكي', s: 'عالي' },
+                { r: /document\.write\s*\(/i, d: 'document.write() — عرضة لـ XSS', s: 'عالي' },
+                { r: /innerHTML\s*=/i, d: 'innerHTML — عرضة لحقن XSS', s: 'متوسط' },
+                { r: /<script>/i, d: 'وسم <script> داخل المحتوى', s: 'عالي' },
+                { r: /exec\s*\(/i, d: 'exec() — تنفيذ أوامر', s: 'عالي' },
+                { r: /shell_exec/i, d: 'shell_exec — تنفيذ أوامر', s: 'عالي' },
+                { r: /system\s*\(/i, d: 'system() — تنفيذ أوامر', s: 'عالي' },
+                { r: /base64_decode/i, d: 'base64_decode — إخفاء كود', s: 'متوسط' },
+                { r: /\$_(GET|POST|REQUEST)/i, d: 'استخدام $_ مباشر — حقن', s: 'متوسط' },
+                { r: /include\s*\(?\s*\$_(GET|POST|REQUEST)/i, d: 'include مع مدخلات — LFI', s: 'عالي' },
+                { r: /DROP\s+TABLE/i, d: 'أمر DROP — خطر فقدان بيانات', s: 'خطير' },
+                { r: /UNION\s+SELECT/i, d: 'UNION SELECT — استخراج بيانات', s: 'خطير' },
+                { r: /onerror\s*=/i, d: 'onerror — XSS محتمل', s: 'متوسط' },
+                { r: /atob\s*\(/i, d: 'atob() — كود قد يكون مخفي', s: 'منخفض' },
+                { r: /(password|apiKey|secret|token)\s*[:=]\s*['"]/i, d: '⚠️ احتمال وجود مفتاح سري', s: 'خطير' },
+            ];
+
+            const found = patterns.filter(p => p.r.test(code));
+
+            if (found.length === 0) {
+                return `✅ <strong>الملف آمن</strong><br>📄 ${filename}<br>🟢 لا توجد ثغرات.`;
+            }
+
+            const critical = found.filter(f => f.s === 'خطير').length;
+            const high = found.filter(f => f.s === 'عالي').length;
+            let risk = 'منخفض',
+                color = '#22c55e';
+            if (critical > 0) { risk = 'خطير';
+                color = '#ef4444'; } else if (high > 2) { risk = 'مرتفع';
+                color = '#f59e0b'; } else if (high > 0) { risk = 'متوسط';
+                color = '#f97316'; }
+
+            const items = found.map(f =>
+                `<li style="color:${f.s === 'خطير' ? '#ef4444' : f.s === 'عالي' ? '#f59e0b' : f.s === 'متوسط' ? '#f97316' : '#94a3b8'};margin-bottom:5px;">
+                            ⚠️ ${f.d} <span style="font-size:10px;background:${f.s === 'خطير' ? '#ef4444' : f.s === 'عالي' ? '#f59e0b' : '#3b82f6'};color:#fff;padding:2px 8px;border-radius:4px;">${f.s}</span>
+                        </li>`
+            ).join('');
+
+            return `
+                        <div style="border-right:4px solid ${color};padding-right:12px;">
+                            <strong>📄 ${filename}</strong><br>
+                            <span style="display:inline-block;background:${color};color:#fff;padding:3px 12px;border-radius:6px;font-weight:700;margin:6px 0;">
+                                ${risk}
+                            </span>
+                            <ul style="margin-top:10px;list-style:none;padding-right:0;">
+                                ${items}
+                            </ul>
+                            <p style="color:#64748b;font-size:12px;margin-top:12px;">
+                                💡 تواصل معي لفحص أعمق
+                            </p>
+                        </div>
+                    `;
+        }
+
+        // =============================================
+        // INIT
+        // =============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCategories();
+            renderProducts(null);
+        });
+    </script>
 </body>
 </html>
