@@ -3,367 +3,1059 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر عبد الباسط الرقمي | للخدمات التقنية والبرمجية</title>
+    <title>المتجر الرقمي الاحترافي</title>
     <style>
-        :root {
-            --bg-color: #0f0f12;
-            --sidebar-bg: #16161a;
-            --card-bg: #1d1d22;
-            --text-color: #ffffff;
-            --text-muted: #a8a8b3;
-            --primary-color: #f1c40f; 
-            --btn-whatsapp: #25d366;
-            --btn-blue: #007bb5;
-            --accent-color: #3498db;
-        }
-
+        /* ====== RESET & BASE ====== */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            min-height: 100vh;
+            font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+            background: #0b0e1a;
+            color: #e0e0e0;
+            line-height: 1.7;
         }
 
-        /* القائمة الجانبية */
-        .sidebar {
-            width: 280px;
-            background-color: var(--sidebar-bg);
-            padding: 30px 20px;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ====== SCROLLBAR ====== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1e2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 10px;
+        }
+
+        /* ====== HEADER ====== */
+        .header {
+            background: linear-gradient(135deg, #0f1322 0%, #1a1e2e 100%);
+            padding: 20px 40px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            border-left: 1px solid #29292e;
-            position: fixed;
-            height: 100vh;
-            right: 0;
+            border-bottom: 1px solid #2a2f45;
+            position: sticky;
             top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .profile-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: #2a2a35; 
-            margin-bottom: 15px;
-            border: 3px solid var(--primary-color);
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #f59e0b;
+            -webkit-text-fill-color: #f59e0b;
+        }
+
+        .header-contact {
             display: flex;
+            gap: 20px;
             align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
         }
 
-        .profile-name {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .profile-tag {
-            font-size: 0.85rem;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-        }
-
-        .menu-btn {
-            width: 100%;
-            padding: 14px 15px;
-            margin-bottom: 12px;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            text-align: right;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 8px;
+        .header-contact a {
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
             transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
-        .menu-btn.active, .menu-btn:hover {
-            background-color: #2a2a35;
-            color: var(--primary-color);
-            font-weight: bold;
+        .btn-whatsapp {
+            background: #25d366;
+            color: #fff !important;
+        }
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
         }
 
-        /* المحتوى الرئيسي */
-        .main-content {
-            flex: 1;
-            padding: 40px;
-            margin-right: 280px; /* لترك مساحة للقائمة الثابتة */
-            overflow-y: auto;
+        .btn-email {
+            background: #3b82f6;
+            color: #fff !important;
+        }
+        .btn-email:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
         }
 
-        .store-header {
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #16161a, #1d1d22);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #29292e;
+        /* ====== HERO ====== */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: radial-gradient(ellipse at center, #141b33 0%, #0b0e1a 70%);
         }
 
-        .store-header h1 {
-            font-size: 2.2rem;
-            color: #fff;
-            margin-bottom: 10px;
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #3b82f6, #a78bfa, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .store-header p {
-            color: var(--text-muted);
-            font-size: 1rem;
+        .hero p {
+            font-size: 20px;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats div {
+            text-align: center;
+        }
+
+        .hero-stats strong {
+            display: block;
+            font-size: 32px;
+            color: #3b82f6;
+        }
+
+        .hero-stats span {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* ====== SECTIONS ====== */
+        .section {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
 
         .section-title {
-            font-size: 1.6rem;
-            margin-bottom: 30px;
-            position: relative;
-            padding-bottom: 10px;
-            color: var(--primary-color);
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-align: center;
         }
 
-        .section-title::after {
+        .section-title span {
+            color: #3b82f6;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 50px;
+            font-size: 17px;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            margin: 0 auto 40px;
+            border-radius: 4px;
+        }
+
+        /* ====== CATEGORIES GRID ====== */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: linear-gradient(145deg, #161c32, #1a1e2e);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid #2a2f45;
+            transition: 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
+            left: 0;
             right: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary-color);
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform: scaleX(0);
+            transition: 0.4s;
         }
 
-        /* شبكة المنتجات */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+        .category-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s, border-color 0.3s;
-            border: 1px solid #29292e;
-        }
-
-        .card:hover {
+        .category-card:hover {
             transform: translateY(-8px);
-            border-color: var(--primary-color);
+            border-color: #3b82f6;
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
         }
 
-        .card-banner {
-            height: 160px;
-            background: linear-gradient(135deg, #18181c, #25252c);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            border-bottom: 1px solid #29292e;
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 18px;
         }
 
-        .card-banner .badge {
-            font-size: 3rem;
+        .category-card h3 {
+            font-size: 22px;
+            font-weight: 700;
             margin-bottom: 10px;
         }
 
-        .category-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: rgba(241, 196, 15, 0.15);
-            color: var(--primary-color);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
+        .category-card p {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 18px;
         }
 
-        .card-body {
-            padding: 25px;
-            flex: 1;
+        .category-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            padding: 5px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ====== PRODUCTS ====== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, #161c32, #1a1e2e);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #2a2f45;
+            transition: 0.4s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 15px 45px rgba(59, 130, 246, 0.1);
+        }
+
+        .product-tag {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .product-card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .product-card .desc {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 16px;
+            min-height: 42px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #3b82f6;
+            margin-bottom: 18px;
+        }
+
+        .product-price small {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .btn-order {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .btn-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.35);
+        }
+
+        /* ====== HOW IT WORKS ====== */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            counter-reset: step;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px 20px;
+            background: #161c32;
+            border-radius: 20px;
+            border: 1px solid #2a2f45;
+            position: relative;
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: #3b82f6;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .step-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .step h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        /* ====== FILE SCANNER ====== */
+        .scanner-box {
+            background: linear-gradient(145deg, #161c32, #1a1e2e);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #2a2f45;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .scanner-box input[type="file"] {
+            display: none;
+        }
+
+        .scanner-label {
+            display: inline-block;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .scanner-label:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(139, 92, 246, 0.35);
+        }
+
+        .scan-result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 14px;
+            background: #0f1322;
+            text-align: right;
+            display: none;
+            font-size: 14px;
+            border-right: 4px solid #3b82f6;
+        }
+
+        /* ====== CONTACT FOOTER ====== */
+        .contact-section {
+            background: linear-gradient(135deg, #0f1322, #1a1e2e);
+            border-top: 1px solid #2a2f45;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .contact-section h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .contact-section p {
+            color: #94a3b8;
+            margin-bottom: 35px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .contact-buttons a {
+            padding: 16px 40px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .contact-buttons a:hover {
+            transform: translateY(-4px);
+        }
+
+        .footer-bottom {
+            background: #080b16;
+            padding: 25px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            border-top: 1px solid #1a1e2e;
+        }
+
+        /* ====== MODAL ====== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #1a1e2e;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid #2a2f45;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-box h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .modal-box .product-name {
+            color: #3b82f6;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .modal-box .contact-options {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 14px;
+            margin: 25px 0;
         }
 
-        .card-title {
-            font-size: 1.25rem;
-            margin-bottom: 12px;
+        .modal-box .contact-options a {
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .modal-close:hover {
+            background: #3b82f6;
             color: #fff;
         }
 
-        .card-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
 
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #29292e;
-            padding-top: 15px;
-        }
+            .hero h1 {
+                font-size: 32px;
+            }
 
-        .price-tag {
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        
-        .price-tag span {
-            color: var(--primary-color);
-            font-size: 0.8rem;
-            display: block;
-            font-weight: normal;
-        }
+            .hero p {
+                font-size: 16px;
+            }
 
-        .btn-action {
-            background-color: var(--btn-whatsapp);
-            color: #000;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+            .section-title {
+                font-size: 26px;
+            }
 
-        .btn-action:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-        }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
 
-        /* التجاوب مع الشاشات المختلفة */
-        @media (max-width: 992px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; height: auto; position: relative; border-left: none; border-bottom: 1px solid #29292e; }
-            .main-content { margin-right: 0; padding: 20px; }
+            .contact-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .modal-box {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="profile-img">💼</div>
-        <div class="profile-name">عبد الباسط</div>
-        <div class="profile-tag">المتجر الرقمي للخدمات الاحترافية</div>
-        
-        <button class="menu-btn active">🛒 جميع الخدمات</button>
-        <button class="menu-btn">📱 قسم البرمجيات</button>
-        <button class="menu-btn">📝 قسم الترجمة</button>
-        <button class="menu-btn">📊 تحليل البيانات</button>
-        <button class="menu-btn">🛡️ فحص الأكواد</button>
+    <!-- ====== HEADER ====== -->
+    <header class="header" id="header">
+        <div class="logo">🛒 المتجر <span>الرقمي</span></div>
+        <div class="header-contact">
+            <a href="https://wa.me/966500000000?text=مرحباً%20أريد%20استفساراً" class="btn-whatsapp" target="_blank">
+                💬 واتساب
+            </a>
+            <a href="mailto:admin@example.com?subject=استفسار%20من%20المتجر" class="btn-email">
+                ✉️ البريد
+            </a>
+        </div>
+    </header>
+
+    <!-- ====== HERO ====== -->
+    <section class="hero">
+        <h1>المتجر الرقمي الاحترافي</h1>
+        <p>كل ما تحتاجه في عالم البرمجة والخدمات الرقمية — برامج، تطوير، قوالب، تحليل، ترجمة، وفحص آمن للملفات.</p>
+        <div class="hero-stats">
+            <div><strong>+50</strong><span>خدمة متوفرة</span></div>
+            <div><strong>+200</strong><span>عميل سعيد</span></div>
+            <div><strong>فوري</strong><span>تواصل مباشر</span></div>
+        </div>
+    </section>
+
+    <!-- ====== CATEGORIES ====== -->
+    <section class="section" id="categories">
+        <h2 class="section-title">الأقسام <span>الرئيسية</span></h2>
+        <div class="divider"></div>
+        <p class="section-sub">اختر القسم المناسب لطلبك</p>
+        <div class="categories-grid" id="categoriesGrid"></div>
+    </section>
+
+    <!-- ====== PRODUCTS ====== -->
+    <section class="section" id="products">
+        <h2 class="section-title">الخدمات <span>المتوفرة</span></h2>
+        <div class="divider"></div>
+        <p class="section-sub">اضغط على أي خدمة للتواصل مباشرة</p>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- ====== FILE SCANNER ====== -->
+    <section class="section" id="scanner">
+        <h2 class="section-title">🔍 فحص <span>الملفات</span></h2>
+        <div class="divider"></div>
+        <p class="section-sub">ارفع ملف JS, HTML, PHP, Python أو أي كود للفحص الأمني</p>
+        <div class="scanner-box">
+            <label for="fileInput" class="scanner-label">📁 اختر ملف للفحص</label>
+            <input type="file" id="fileInput" accept=".js,.html,.htm,.php,.py,.java,.cpp,.c,.cs,.rb,.go,.ts,.jsx,.tsx,.vue,.svelte,.sql,.xml,.json,.yaml,.yml,.sh,.bash,.ps1,.bat">
+            <div id="scanResult" class="scan-result"></div>
+        </div>
+    </section>
+
+    <!-- ====== HOW IT WORKS ====== -->
+    <section class="section" id="how">
+        <h2 class="section-title">كيف <span>تطلب</span></h2>
+        <div class="divider"></div>
+        <p class="section-sub">ثلاث خطوات بسيطة</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">👆</div>
+                <h4>اختر الخدمة</h4>
+                <p>تصفح الأقسام واختر ما يناسبك</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">💬</div>
+                <h4>تواصل مباشر</h4>
+                <p>اضغط على الخدمة وسيفتح واتساب أو البريد</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">⚡</div>
+                <h4>استلم الخدمة</h4>
+                <p>أرد عليك فوراً وأجهز طلبك</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== CONTACT ====== -->
+    <section class="contact-section" id="contact">
+        <h2>تواصل معي <span style="color:#3b82f6;">مباشر</span></h2>
+        <p>لا توجد عجلة دفع — اختر الخدمة وتواصل معي على الفور</p>
+        <div class="contact-buttons">
+            <a href="https://wa.me/966500000000?text=مرحباً%20أريد%20الاستفسار%20عن%20خدماتكم" class="btn-whatsapp" target="_blank" style="background:#25d366;color:#fff;">
+                💬 تواصل واتساب
+            </a>
+            <a href="mailto:admin@example.com?subject=طلب%20خدمة%20رقمية" class="btn-email" target="_blank" style="background:#3b82f6;color:#fff;">
+                ✉️ راسلني عبر البريد
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer-bottom">
+        © 2026 المتجر الرقمي — جميع الحقوق محفوظة. تواصل مباشر بدون وسطاء.
+    </footer>
+
+    <!-- ====== MODAL ====== -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <h3>✅ تم اختيار الخدمة</h3>
+            <p class="product-name" id="modalProductName">اسم المنتج</p>
+            <p style="color:#94a3b8;font-size:14px;">اختر وسيلة التواصل المباشر وأرسل لي طلبك:</p>
+            <div class="contact-options">
+                <a href="#" id="modalWhatsapp" target="_blank" class="btn-whatsapp" style="background:#25d366;color:#fff;text-align:center;">
+                    💬 أرسل عبر واتساب
+                </a>
+                <a href="#" id="modalEmail" target="_blank" class="btn-email" style="background:#3b82f6;color:#fff;text-align:center;">
+                    ✉️ أرسل عبر البريد
+                </a>
+            </div>
+            <button class="modal-close" onclick="closeModal()">إلغاء</button>
+        </div>
     </div>
 
-    <div class="main-content">
-        
-        <div class="store-header">
-            <h1>مرحباً بك في متجري الرقمي</h1>
-            <p>اختر الخدمة أو المنتج البرمجي الذي تحتاجه، واضغط لطلب الخدمة مباشرة عبر واتساب للتنفيذ الفوري والسريع.</p>
-        </div>
+    <script>
+        // =====================================================
+        // DATA
+        // =====================================================
+        const categories = [{
+            id: 'software',
+            icon: '💻',
+            title: 'البرامج والتطبيقات',
+            desc: 'برامج سطح مكتب، تطبيقات موبايل، أدوات مساعدة',
+            count: '8'
+        }, {
+            id: 'dev',
+            icon: '⚙️',
+            title: 'تطوير البرامج',
+            desc: 'تصميم وبرمجة أنظمة مخصصة حسب طلبك',
+            count: '10'
+        }, {
+            id: 'templates',
+            icon: '🎨',
+            title: 'قوالب البرمجة',
+            desc: 'HTML, CSS, JS, React, Vue, Angular قوالب جاهزة',
+            count: '12'
+        }, {
+            id: 'source',
+            icon: '📦',
+            title: 'بيع ملفات المصادر',
+            desc: 'جميع لغات البرمجة — أكواد كاملة ومشاريع',
+            count: '15'
+        }, {
+            id: 'translate',
+            icon: '🌐',
+            title: 'الترجمة الاحترافية',
+            desc: 'ترجمة ملفات، كتب، وثائق، مواقع',
+            count: '6'
+        }, {
+            id: 'analytics',
+            icon: '📊',
+            title: 'تحليل البيانات والتقارير',
+            desc: 'تحليل بيانات، تقارير للشركات، داشبوردات',
+            count: '7'
+        }, {
+            id: 'security',
+            icon: '🔒',
+            title: 'فحص الملفات والكود',
+            desc: 'فحص أمني لـ JS, HTML, PHP, Python وجميع اللغات',
+            count: '5'
+        }];
 
-        <h2 class="section-title">الخدمات والمنتجات المتوفرة</h2>
-        <div class="grid-container">
-            
-            <div class="card">
-                <div class="card-banner">
-                    <span class="category-tag">تطوير</span>
-                    <div class="badge">💻</div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">تطوير وتصميم البرامج والمواقع المخصصة</h4>
-                    <p class="card-text">بناء برامج وأنظمة ذكية وتطوير واجهات مواقع ويب كاملة مخصصة بالكامل لأعمالك وتتوافق مع كافة الأجهزة الشاشات.</p>
-                    <div class="card-footer">
-                        <div class="price-tag">300$ <span>تبدأ من</span></div>
-                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20أود%20طلب%20خدمة%20تطوير%20وتصميم%20البرامج%20والمواقع" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
-                    </div>
-                </div>
-            </div>
+        const products = [{
+            id: 1,
+            category: 'software',
+            tag: 'برامج',
+            name: 'برنامج إدارة المشاريع',
+            desc: 'نظام كامل لإدارة المهام والفريق مع تقارير',
+            price: '١٥٠$'
+        }, {
+            id: 2,
+            category: 'software',
+            tag: 'برامج',
+            name: 'برنامج محاسبة متكامل',
+            desc: 'فواتير، مخزون، عملاء — واجهة عربية احترافية',
+            price: '٢٠٠$'
+        }, {
+            id: 3,
+            category: 'dev',
+            tag: 'تطوير',
+            name: 'تطوير نظام مخصص',
+            desc: 'أي نظام تريده — ويب أو تطبيق — حسب المواصفات',
+            price: 'يبدأ من ٣٠٠$'
+        }, {
+            id: 4,
+            category: 'dev',
+            tag: 'تطوير',
+            name: 'تطوير API وخدمات Backend',
+            desc: 'Node.js, Python, PHP — REST API متكامل',
+            price: 'يبدأ من ٢٥٠$'
+        }, {
+            id: 5,
+            category: 'templates',
+            tag: 'قوالب',
+            name: 'قالب متجر إلكتروني متكامل',
+            desc: 'HTML/CSS/JS — متجاوب وجاهز للتعديل',
+            price: '٧٥$'
+        }, {
+            id: 6,
+            category: 'templates',
+            tag: 'قوالب',
+            name: 'قالب لوحة تحكم Admin',
+            desc: 'داشبورد احترافي مع جميع المكونات',
+            price: '٨٥$'
+        }, {
+            id: 7,
+            category: 'source',
+            tag: 'اكواد',
+            name: 'مشروع نظام تسجيل دخول كامل',
+            desc: 'PHP + MySQL — تسجيل، دخول، صلاحيات',
+            price: '٤٠$'
+        }, {
+            id: 8,
+            category: 'source',
+            tag: 'اكواد',
+            name: 'سكريبت بوت تيليجرام متكامل',
+            desc: 'Python — بوت كامل مع قاعدة بيانات',
+            price: '٦٠$'
+        }, {
+            id: 9,
+            category: 'source',
+            tag: 'اكواد',
+            name: 'مشروع React Native تطبيق موبايل',
+            desc: 'كود كامل + واجهة مستخدم احترافية',
+            price: '١٢٠$'
+        }, {
+            id: 10,
+            category: 'translate',
+            tag: 'ترجمة',
+            name: 'ترجمة وثائق وملفات PDF',
+            desc: 'ترجمة احترافية لأي لغة — تسليم سريع',
+            price: 'حسب الصفحات'
+        }, {
+            id: 11,
+            category: 'translate',
+            tag: 'ترجمة',
+            name: 'ترجمة مواقع وتطبيقات',
+            desc: 'ترجمة واجهات مستخدم ومحتوى كامل',
+            price: 'يبدأ من ١٠٠$'
+        }, {
+            id: 12,
+            category: 'analytics',
+            tag: 'تحليل',
+            name: 'تقرير تحليل بيانات متكامل',
+            desc: 'تحليل بيانات شركتك مع رسوم بيانية وتوصيات',
+            price: 'يبدأ من ٢٠٠$'
+        }, {
+            id: 13,
+            category: 'analytics',
+            tag: 'تحليل',
+            name: 'داشبورد تفاعلي للشركات',
+            desc: 'لوحة تحكم تحليلات حية مع Power BI أو مخصص',
+            price: 'يبدأ من ٣٠٠$'
+        }, {
+            id: 14,
+            category: 'security',
+            tag: 'فحص',
+            name: 'فحص أمني لموقع أو تطبيق',
+            desc: 'فحص شامل للثغرات وتقرير مفصل',
+            price: 'يبدأ من ١٥٠$'
+        }, {
+            id: 15,
+            category: 'security',
+            tag: 'فحص',
+            name: 'فحص ملفات JS / HTML / PHP',
+            desc: 'كشف الثغرات والفيروسات والكود الخبيث',
+            price: '٢٥$ - ١٠٠$'
+        }];
 
-            <div class="card">
-                <div class="card-banner">
-                    <span class="category-tag">قوالب جاهزة</span>
-                    <div class="badge">📦</div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">بيع ملفات لغات البرمجة والقوالب الجاهزة</h4>
-                    <p class="card-text">قوالب جاهزة وأكواد نظيفة ومنسقة ومكتوبة بمختلف لغات البرمجة (Python, JS, HTML/CSS) لتسريع وتطوير مشاريعك الخاصة.</p>
-                    <div class="card-footer">
-                        <div class="price-tag">45$ <span>تبدأ من</span></div>
-                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20أرغب%20في%20شراء%20أكواد%20برمجية%20أو%20قوالب%20جاهزة" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
-                    </div>
-                </div>
-            </div>
+        // =====================================================
+        // CONFIG — غير الأرقام والإيميل هنا
+        // =====================================================
+        const CONFIG = {
+            whatsappNumber: '966500000000',
+            email: 'admin@example.com'
+        };
 
-            <div class="card">
-                <div class="card-banner">
-                    <span class="category-tag">ترجمة</span>
-                    <div class="badge">📝</div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">ترجمة احترافية للملفات والكتب</h4>
-                    <p class="card-text">ترجمة متخصصة ودقيقة من اللغة العربية إلى الإنجليزية والعكس للملفات الكبيرة، الكتب، والمقالات مع الحفاظ على التنسيق الأصلي.</p>
-                    <div class="card-footer">
-                        <div class="price-tag">15$ <span>للكتاب أو الصفحة</span></div>
-                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20لدي%20ملفات%20أو%20كتب%20أود%20ترجمتها" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
-                    </div>
-                </div>
-            </div>
+        // =====================================================
+        // RENDER CATEGORIES
+        // =====================================================
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = categories.map(cat => `
+                        <div class="category-card" onclick="scrollToProducts('${cat.id}')">
+                            <div class="category-icon">${cat.icon}</div>
+                            <h3>${cat.title}</h3>
+                            <p>${cat.desc}</p>
+                            <span class="category-badge">${cat.count} خدمات</span>
+                        </div>
+                    `).join('');
+        }
 
-            <div class="card">
-                <div class="card-banner">
-                    <span class="category-tag">بيانات</span>
-                    <div class="badge">📊</div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">تحليل البيانات وإعداد تقارير الشركات</h4>
-                    <p class="card-text">تنظيم وتحليل البيانات المعقدة للشركات واستخراج الإحصائيات مع تقديم تقارير دورية احترافية مدعومة بالرسوم البيانية لمساعدتك باتخاذ القرار.</p>
-                    <div class="card-footer">
-                        <div class="price-tag">150$ <span>تبدأ من</span></div>
-                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20أريد%20طلب%20خدمة%20تحليل%20البيانات%20وتقارير%20الشركات" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
-                    </div>
-                </div>
-            </div>
+        // =====================================================
+        // RENDER PRODUCTS
+        // =====================================================
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(p => `
+                        <div class="product-card" data-category="${p.category}">
+                            <span class="product-tag">${p.tag}</span>
+                            <h4>${p.name}</h4>
+                            <p class="desc">${p.desc}</p>
+                            <div class="product-price">${p.price} <small>ريال</small></div>
+                            <button class="btn-order" onclick="openOrderModal(${p.id})">
+                                🛒 أطلب الخدمة
+                            </button>
+                        </div>
+                    `).join('');
+        }
 
-            <div class="card">
-                <div class="card-banner">
-                    <span class="category-tag">أمان وحماية</span>
-                    <div class="badge">🛡️</div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">فحص ومراجعة الملفات البرمجية (JS, HTML...)</h4>
-                    <p class="card-text">مراجعة وفحص الأكواد البرمجية الخاصة بك بدقة للتأكد من خلوها من الثغرات الأمنية أو الأخطاء البرمجية وضمان عملها بأعلى كفاءة.</p>
-                    <div class="card-footer">
-                        <div class="price-tag">80$ <span>لكل فحص</span></div>
-                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20لدي%20ملفات%20برمجية%20أرغب%20في%20عمل%20فحص%20وأوديت%20لها" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
-                    </div>
-                </div>
-            </div>
+        // =====================================================
+        // SCROLL TO PRODUCTS SECTION WITH FILTER
+        // =====================================================
+        function scrollToProducts(categoryId) {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            // Highlight products in this category
+            document.querySelectorAll('.product-card').forEach(card => {
+                if (card.dataset.category === categoryId) {
+                    card.style.borderColor = '#3b82f6';
+                    card.style.boxShadow = '0 0 30px rgba(59,130,246,0.25)';
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    card.style.opacity = '0.3';
+                }
+            });
+            // Reset after 3 seconds
+            setTimeout(() => {
+                document.querySelectorAll('.product-card').forEach(card => {
+                    card.style.borderColor = '';
+                    card.style.boxShadow = '';
+                    card.style.opacity = '1';
+                });
+            }, 3000);
+        }
 
-        </div>
-    </div>
+        // =====================================================
+        // MODAL
+        // =====================================================
+        function openOrderModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
 
+            document.getElementById('modalProductName').textContent = `${product.name} — ${product.price}`;
+
+            const message = encodeURIComponent(
+                `مرحباً، أريد طلب الخدمة التالية:\n\n📌 ${product.name}\n💵 السعر: ${product.price}\n📝 الوصف: ${product.desc}\n\nأرجو التواصل معي للتجهيز.`
+            );
+
+            document.getElementById('modalWhatsapp').href =
+                `https://wa.me/${CONFIG.whatsappNumber}?text=${message}`;
+
+            document.getElementById('modalEmail').href =
+                `mailto:${CONFIG.email}?subject=طلب خدمة: ${product.name}&body=${message}`;
+
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal on overlay click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // =====================================================
+        // FILE SCANNER
+        // =====================================================
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const resultDiv = document.getElementById('scanResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '⏳ جاري فحص الملف...';
+
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const content = ev.target.result;
+                const report = scanCode(content, file.name);
+                resultDiv.innerHTML = report;
+            };
+            reader.readAsText(file);
+        });
+
+        function scanCode(code, filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            let issues = [];
+            let risk = 'منخفض';
+            let riskColor = '#22c55e';
+
+            // Patterns malicios
+            const patterns = [
+                { regex: /eval\s*\(/i, desc: 'استخدام eval() — خطر تنفيذ كود ديناميكي', severity: 'عالي' },
+                { regex: /document\.write\s*\(/i, desc: 'document.write() — عرضة لـ XSS', severity: 'عالي' },
+                { regex: /innerHTML\s*=/i, desc: 'innerHTML — عرضة لحقن XSS', severity: 'متوسط' },
+                { regex: /<script>/i, desc: 'وسم <script> داخل المحتوى', severity: 'عالي' },
+                { regex: /exec\s*\(/i, desc: 'exec() — تنفيذ أوامر خطر', severity: 'عالي' },
+                { regex: /shell_exec/i, desc: 'shell_exec — تنفيذ أوامر', severity: 'عالي' },
+                { regex: /system\s*\(/i, desc: 'system() — تنفيذ أوامر', severity: 'عالي' },
+                { regex: /passthru/i, desc: 'passthru — تنفيذ أوامر', severity: 'عالي' },
+                { regex: /base64_decode/i, desc: 'base64_decode — إخفاء كود خبيث', severity: 'متوسط' },
+                { regex: /\\$_(GET|POST|REQUEST|COOKIE|SERVER|FILES)/i,
+                    desc: 'استخدام $_ مباشر — عرضة لحقن', severity: 'متوسط' },
+                { regex: /include\s*\(?\s*\\$_(GET|POST|REQUEST)/i,
+                    desc: 'include مع مدخلات المستخدم — LFI', severity: 'عالي' },
+                { regex: /require\s*\(?\s*\\$_(GET|POST|REQUEST)/i,
+                    desc: 'require مع مدخلات المستخدم — LFI', severity: 'عالي' },
+                { regex: /SELECT.*FROM.*WHERE/i, desc: 'استعلام SQL مباشر — عرضة لـ SQL Injection', severity: 'عالي' },
+                { regex: /INSERT\s+INTO/i, desc: 'استعلام SQL مباشر — عرضة لـ SQL Injection', severity: 'عالي' },
+                { regex: /DROP\s+TABLE/i, desc: 'أمر DROP — خطر فقدان بيانات', severity: 'خطير' },
+                { regex: /UNION\s+SELECT/i, desc: 'UNION SELECT — استخراج بيانات غير مصرح', severity: 'خطير' },
+                { regex: /onerror\s*=/i, desc: 'onerror — عرضة لـ XSS', severity: 'متوسط' },
+                { regex: /onload\s*=/i, desc: 'onload — عرضة لـ XSS', severity: 'متوسط' },
+                { regex: /onclick\s*=/i, desc: 'onclick — عرضة لـ XSS', severity: 'متوسط' },
+                { regex: /atob\s*\(/i, desc: 'atob() — فك تشفير Base64, قد يكون كود مخفي', severity: 'منخفض' },
+                { regex: /btoa\s*\(/i, desc: 'btoa() — تشفير Base64', severity: 'منخفض' },
+                { regex: /XMLHttpRequest/i, desc: 'XHR — تحقق من صحة الطلبات', severity: 'منخفض' },
+                { regex: /fetch\s*\(/i, desc: 'fetch() — تحقق من URL الهدف', severity: 'منخفض' },
+                { regex: /localStorage/i, desc: 'localStorage — بيانات حساسة بالمتصفح', severity: 'منخفض' },
+                { regex: /sessionStorage/i, desc: 'sessionStorage — بيانات حساسة بالمتصفح', severity: 'منخفض' },
+            ];
+
+            patterns.forEach(p => {
+                if (p.regex.test(code)) {
+                    issues.push(p);
+                }
+            });
+
+            if (issues.length === 0) {
+                return `
+                            ✅ <strong>الملف آمن تماماً</strong><br>
+                            📄 ${filename}<br>
+                            🟢 لا توجد ثغرات أو أكواد مشبوهة.
+                        `;
+            }
+
+            const highIssues = issues.filter(i => i.severity === 'خطير' || i.severity === 'عالي').length;
+            if (highIssues > 3) { risk = 'خطير';
+                riskColor = '#ef4444'; } else if (highIssues > 0) { risk = 'مرتفع';
+                riskColor = '#f59e0b'; } else if (issues.length > 3) { risk = 'متوسط';
+                riskColor = '#f97316'; }
+
+            let issuesHtml = issues.map(i =>
+                `<li style="color:${i.severity === 'خطير' ? '#ef4444' : i.severity === 'عالي' ? '#f59e0b' : i.severity === 'متوسط' ? '#f97316' : '#94a3b8'}; margin-bottom:6px;">
+                            ⚠️ ${i.desc} <span style="font-size:11px;background:${i.severity === 'خطير' ? '#ef4444' : i.severity === 'عالي' ? '#f59e0b' : '#3b82f6'};color:#fff;padding:2px 8px;border-radius:4px;">${i.severity}</span>
+                        </li>`
+            ).join('');
+
+            return `
+                        <div style="border-right:4px solid ${riskColor}; padding-right:14px;">
+                            <strong>📄 ${filename}</strong><br>
+                            <span style="display:inline-block;background:${riskColor};color:#fff;padding:4px 14px;border-radius:8px;font-weight:700;margin:8px 0;">
+                                مستوى الخطورة: ${risk}
+                            </span>
+                            <ul style="margin-top:14px;list-style:none;padding-right:0;">
+                                ${issuesHtml}
+                            </ul>
+                            <p style="color:#94a3b8;font-size:13px;margin-top:14px;">
+                                💡 تواصل معي لفحص أعمق وإصلاح الثغرات
+                            </p>
+                        </div>
+                    `;
+        }
+
+        // =====================================================
+        // INIT
+        // =====================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCategories();
+            renderProducts();
+        });
+    </script>
 </body>
 </html>
