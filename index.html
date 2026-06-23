@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عبد الباسط | البرمجة والتصميم</title>
+    <title>متجر عبد الباسط الرقمي | للخدمات التقنية والبرمجية</title>
     <style>
         :root {
-            --bg-color: #121214;
-            --sidebar-bg: #1a1a1e;
-            --card-bg: #202024;
+            --bg-color: #0f0f12;
+            --sidebar-bg: #16161a;
+            --card-bg: #1d1d22;
             --text-color: #ffffff;
             --text-muted: #a8a8b3;
             --primary-color: #f1c40f; 
+            --btn-whatsapp: #25d366;
             --btn-blue: #007bb5;
+            --accent-color: #3498db;
         }
 
         * {
@@ -29,35 +31,51 @@
             min-height: 100vh;
         }
 
+        /* القائمة الجانبية */
         .sidebar {
-            width: 260px;
+            width: 280px;
             background-color: var(--sidebar-bg);
             padding: 30px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             border-left: 1px solid #29292e;
+            position: fixed;
+            height: 100vh;
+            right: 0;
+            top: 0;
         }
 
         .profile-img {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background: #333; 
+            background: #2a2a35; 
             margin-bottom: 15px;
-            border: 2px solid var(--primary-color);
+            border: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
         }
 
         .profile-name {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
             font-weight: bold;
+            color: #fff;
+        }
+
+        .profile-tag {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
         }
 
         .menu-btn {
             width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 10px;
+            padding: 14px 15px;
+            margin-bottom: 12px;
             background: transparent;
             border: none;
             color: var(--text-muted);
@@ -68,26 +86,48 @@
             transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .menu-btn.active, .menu-btn:hover {
-            background-color: var(--primary-color);
-            color: #000;
+            background-color: #2a2a35;
+            color: var(--primary-color);
             font-weight: bold;
         }
 
+        /* المحتوى الرئيسي */
         .main-content {
             flex: 1;
             padding: 40px;
+            margin-right: 280px; /* لترك مساحة للقائمة الثابتة */
             overflow-y: auto;
         }
 
+        .store-header {
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #16161a, #1d1d22);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #29292e;
+        }
+
+        .store-header h1 {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .store-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
         .section-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 30px;
             position: relative;
             padding-bottom: 10px;
+            color: var(--primary-color);
         }
 
         .section-title::after {
@@ -95,57 +135,67 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 50px;
+            width: 60px;
             height: 3px;
             background-color: var(--primary-color);
         }
 
+        /* شبكة المنتجات */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
             margin-bottom: 40px;
         }
 
         .card {
             background-color: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s;
+            transition: transform 0.3s, border-color 0.3s;
             border: 1px solid #29292e;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
         }
 
         .card-banner {
-            height: 180px;
-            background: linear-gradient(135deg, #1e1e24, #2a2a35);
+            height: 160px;
+            background: linear-gradient(135deg, #18181c, #25252c);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
             text-align: center;
-        }
-
-        .card-banner h3 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+            position: relative;
+            border-bottom: 1px solid #29292e;
         }
 
         .card-banner .badge {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .category-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(241, 196, 15, 0.15);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: bold;
         }
 
         .card-body {
-            padding: 20px;
+            padding: 25px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -153,116 +203,161 @@
         }
 
         .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #fff;
         }
 
         .card-text {
             color: var(--text-muted);
             font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
 
         .card-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-top: 1px solid #29292e;
+            padding-top: 15px;
         }
 
         .price-tag {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .price-tag span {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            display: block;
+            font-weight: normal;
         }
 
         .btn-action {
-            background-color: var(--btn-blue);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
+            background-color: var(--btn-whatsapp);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 8px;
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: bold;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        @media (max-width: 768px) {
+        .btn-action:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 992px) {
             body { flex-direction: column; }
-            .sidebar { width: 100%; border-left: none; border-bottom: 1px solid #29292e; }
-            .main-content { padding: 20px; }
+            .sidebar { width: 100%; height: auto; position: relative; border-left: none; border-bottom: 1px solid #29292e; }
+            .main-content { margin-right: 0; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <div class="profile-img"></div>
+        <div class="profile-img">💼</div>
         <div class="profile-name">عبد الباسط</div>
-        <button class="menu-btn active">🏠 الرئيسية</button>
-        <button class="menu-btn">📦 الخدمات والأعمال</button>
-        <button class="menu-btn">📞 التواصل</button>
+        <div class="profile-tag">المتجر الرقمي للخدمات الاحترافية</div>
+        
+        <button class="menu-btn active">🛒 جميع الخدمات</button>
+        <button class="menu-btn">📱 قسم البرمجيات</button>
+        <button class="menu-btn">📝 قسم الترجمة</button>
+        <button class="menu-btn">📊 تحليل البيانات</button>
+        <button class="menu-btn">🛡️ فحص الأكواد</button>
     </div>
 
     <div class="main-content">
-        <h2 class="section-title">أحدث الخدمات والمشاريع</h2>
+        
+        <div class="store-header">
+            <h1>مرحباً بك في متجري الرقمي</h1>
+            <p>اختر الخدمة أو المنتج البرمجي الذي تحتاجه، واضغط لطلب الخدمة مباشرة عبر واتساب للتنفيذ الفوري والسريع.</p>
+        </div>
+
+        <h2 class="section-title">الخدمات والمنتجات المتوفرة</h2>
         <div class="grid-container">
             
             <div class="card">
                 <div class="card-banner">
+                    <span class="category-tag">تطوير</span>
                     <div class="badge">💻</div>
-                    <p style="color: var(--text-muted);">تصميم وتطوير المواقع</p>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">بناء منصات ومواقع ويب مخصصة</h4>
-                    <p class="card-text">برمجة وتطوير واجهات ويب احترافية، متوافقة بالكامل مع شاشات الهواتف والحواسيب، ومبنية بأحدث التقنيات.</p>
+                    <h4 class="card-title">تطوير وتصميم البرامج والمواقع المخصصة</h4>
+                    <p class="card-text">بناء برامج وأنظمة ذكية وتطوير واجهات مواقع ويب كاملة مخصصة بالكامل لأعمالك وتتوافق مع كافة الأجهزة الشاشات.</p>
                     <div class="card-footer">
-                        <span class="price-tag">من 300$</span>
-                        <a href="#" class="btn-action">اطلب الآن</a>
+                        <div class="price-tag">300$ <span>تبدأ من</span></div>
+                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20أود%20طلب%20خدمة%20تطوير%20وتصميم%20البرامج%20والمواقع" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-banner">
-                    <div class="badge" style="color: #e67e22;">📱</div>
-                    <p style="color: var(--text-muted);">تصميم وتطوير البرامج</p>
+                    <span class="category-tag">قوالب جاهزة</span>
+                    <div class="badge">📦</div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">بناء تطبيقات برمجية متكاملة</h4>
-                    <p class="card-text">نقدم خدمات تصميم وتطوير تطبيقات سطح المكتب وتطبيقات الجوال المخصصة لاحتياجاتك التجارية، لتبسيط العمليات وزيادة الكفاءة.</p>
+                    <h4 class="card-title">بيع ملفات لغات البرمجة والقوالب الجاهزة</h4>
+                    <p class="card-text">قوالب جاهزة وأكواد نظيفة ومنسقة ومكتوبة بمختلف لغات البرمجة (Python, JS, HTML/CSS) لتسريع وتطوير مشاريعك الخاصة.</p>
                     <div class="card-footer">
-                        <span class="price-tag">من 500$</span>
-                        <a href="#" class="btn-action" style="background-color: #e67e22;">اطلب الآن</a>
+                        <div class="price-tag">45$ <span>تبدأ من</span></div>
+                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20أرغب%20في%20شراء%20أكواد%20برمجية%20أو%20قوالب%20جاهزة" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-banner">
-                    <div class="badge" style="color: #9b59b6;">🛒</div>
-                    <p style="color: var(--text-muted);">بيع أكواد برمجية وقوالب</p>
+                    <span class="category-tag">ترجمة</span>
+                    <div class="badge">📝</div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">متجر المنتجات البرمجية</h4>
-                    <p class="card-text">تسوق من مكتبتنا المتنوعة من الأكواد البرمجية الجاهزة والقوالب المصممة بعناية، الجاهزة للاستخدام في مشاريعك القادمة.</p>
+                    <h4 class="card-title">ترجمة احترافية للملفات والكتب</h4>
+                    <p class="card-text">ترجمة متخصصة ودقيقة من اللغة العربية إلى الإنجليزية والعكس للملفات الكبيرة، الكتب، والمقالات مع الحفاظ على التنسيق الأصلي.</p>
                     <div class="card-footer">
-                        <span class="price-tag">من 50$</span>
-                        <a href="#" class="btn-action" style="background-color: #9b59b6;">اطلب الآن</a>
+                        <div class="price-tag">15$ <span>للكتاب أو الصفحة</span></div>
+                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20لدي%20ملفات%20أو%20كتب%20أود%20ترجمتها" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-banner">
-                    <div class="badge" style="color: #2ecc71;">📝</div>
-                    <p style="color: var(--text-muted);">ترجمة متخصصة</p>
+                    <span class="category-tag">بيانات</span>
+                    <div class="badge">📊</div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">ترجمة تقنية ومحتوى ويب</h4>
-                    <p class="card-text">تقديم خدمات ترجمة احترافية ودقيقة من الإنجليزية إلى العربية والعكس، مع العناية الفائقة بالمصطلحات التقنية.</p>
+                    <h4 class="card-title">تحليل البيانات وإعداد تقارير الشركات</h4>
+                    <p class="card-text">تنظيم وتحليل البيانات المعقدة للشركات واستخراج الإحصائيات مع تقديم تقارير دورية احترافية مدعومة بالرسوم البيانية لمساعدتك باتخاذ القرار.</p>
                     <div class="card-footer">
-                        <span class="price-tag">من 20$ للصفحة</span>
-                        <a href="#" class="btn-action" style="background-color: #2ecc71;">اطلب الآن</a>
+                        <div class="price-tag">150$ <span>تبدأ من</span></div>
+                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20أريد%20طلب%20خدمة%20تحليل%20البيانات%20وتقارير%20الشركات" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-banner">
+                    <span class="category-tag">أمان وحماية</span>
+                    <div class="badge">🛡️</div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">فحص ومراجعة الملفات البرمجية (JS, HTML...)</h4>
+                    <p class="card-text">مراجعة وفحص الأكواد البرمجية الخاصة بك بدقة للتأكد من خلوها من الثغرات الأمنية أو الأخطاء البرمجية وضمان عملها بأعلى كفاءة.</p>
+                    <div class="card-footer">
+                        <div class="price-tag">80$ <span>لكل فحص</span></div>
+                        <a href="https://wa.me/123456789?text=مرحباً%20عبدالباسط،%20لدي%20ملفات%20برمجية%20أرغب%20في%20عمل%20فحص%20وأوديت%20لها" target="_blank" class="btn-action">💬 طلب عبر واتساب</a>
                     </div>
                 </div>
             </div>
