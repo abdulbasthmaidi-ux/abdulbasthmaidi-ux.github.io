@@ -3,1062 +3,847 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>المتجر الرقمي الاحترافي </title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>BASCOE — منصة الخدمات الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-
-        /* ====== BASE ====== */
         * {
-
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        :root {
+            --bg: #04070f;
+            --card: rgba(11, 17, 40, 0.7);
+            --border: rgba(59, 130, 246, 0.12);
+            --blue: #3b82f6;
+            --blue-light: #60a5fa;
+            --purple: #8b5cf6;
+            --text: #e2e8f0;
+            --muted: #64748b;
+        }
         body {
-
-            font-family: 'Cairo', 'Segoe UI', sans-serif;
-            background: #080b16;
-            color: #e8edf5;
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.7;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--purple)); border-radius: 10px; }
+
+        /* ==================== CANVAS BACKGROUND ==================== */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #10141f;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 10px;
-        }
-
-        /* ====== HEADER ====== */
+        /* ==================== HEADER ==================== */
         .header {
-            background: #0c101c;
-            padding: 18px 40px;
+            position: relative;
+            z-index: 10;
+            background: rgba(4, 7, 15, 0.85);
+            backdrop-filter: blur(24px);
+            padding: 14px 50px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #1a2040;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.05);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
         }
-
         .logo {
-            font-size: 26px;
-            font-weight: 900;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
-        .logo .icon {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 10px;
+        .logo-box {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
+            font-weight: 900;
             color: #fff;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
         }
-        .logo .brand {
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+        .logo-text {
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f0f4ff, var(--blue-light), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        .logo .brand span {
-            color: #f59e0b;
-            -webkit-text-fill-color: #f59e0b;
+            letter-spacing: 1px;
         }
 
-        .header-contact {
-            display: flex;
-            gap: 12px;
-        }
-        .header-contact a {
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 13px;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .btn-whatsapp {
-            background: #22c55e;
-            color: #fff !important;
-        }
-        .btn-whatsapp:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.25);
-        }
-        .btn-email {
-            background: #3b82f6;
-            color: #fff !important;
-        }
-        .btn-email:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
-        }
-
-        /* ====== HERO ====== */
+        /* ==================== HERO ==================== */
         .hero {
+            position: relative;
+            z-index: 5;
             text-align: center;
-            padding: 90px 20px 70px;
-            background: radial-gradient(ellipse at 50% 0%, #111827 0%, #080b16 70%);
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -40%;
-            left: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            right: -20%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            padding: 6px 24px;
-            border-radius: 50px;
-            font-size: 13px;
-            color: #60a5fa;
-            margin-bottom: 20px;
-            position: relative;
+            padding: 110px 20px 90px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(13, 21, 48, 0.6) 0%, transparent 70%);
         }
         .hero h1 {
-            font-size: 48px;
+            font-size: 58px;
             font-weight: 900;
-            margin-bottom: 14px;
-            background: linear-gradient(135deg, #e8edf5 20%, #60a5fa 50%, #a78bfa 80%);
+            background: linear-gradient(135deg, #fff 10%, var(--blue-light) 50%, var(--purple) 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            position: relative;
+            margin-bottom: 14px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards;
         }
         .hero p {
             font-size: 18px;
-            color: #8892a8;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            position: relative;
+            color: #8892b0;
+            max-width: 560px;
+            margin: 0 auto 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.2s forwards;
         }
-        .hero-stats {
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== STATS COUNTERS ==================== */
+        .stats-row {
+            position: relative;
+            z-index: 5;
             display: flex;
             justify-content: center;
-            gap: 48px;
+            gap: 60px;
+            padding: 25px 20px 55px;
             flex-wrap: wrap;
-            position: relative;
         }
-        .hero-stats div {
+        .stat-item {
             text-align: center;
         }
-        .hero-stats strong {
-            display: block;
-            font-size: 30px;
-            color: #60a5fa;
+        .stat-item .num {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--blue-light), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .hero-stats span {
-            color: #64748b;
-            font-size: 13px;
+        .stat-item .label {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 2px;
         }
 
-        /* ====== SECTIONS ====== */
+        /* ==================== SECTIONS ==================== */
         .section {
-            max-width: 1200px;
+            position: relative;
+            z-index: 5;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 50px 20px;
         }
-
         .section-title {
-            font-size: 30px;
-            font-weight: 800;
-            margin-bottom: 8px;
+            font-size: 32px;
+            font-weight: 900;
             text-align: center;
         }
         .section-title .hl {
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            background: linear-gradient(135deg, var(--blue-light), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .section-sub {
             text-align: center;
-            color: #64748b;
-            margin-bottom: 40px;
-            font-size: 15px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            font-size: 14px;
         }
-        .section-divider {
+        .section-line {
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            margin: 12px auto 36px;
+            background: linear-gradient(90deg, var(--blue), var(--purple));
+            margin: 10px auto 35px;
             border-radius: 4px;
         }
 
-        /* ====== CATEGORIES ====== */
-        .categories-grid {
+        /* ==================== CATEGORIES ==================== */
+        .cat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+            gap: 14px;
         }
-
-        .category-card {
-            background: #0f1422;
+        .cat-card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 28px 20px;
+            padding: 26px 16px;
             text-align: center;
-            border: 1px solid #1a2040;
-            transition: 0.3s;
+            border: 1px solid var(--border);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             position: relative;
+            overflow: hidden;
         }
-        .category-card:hover {
-            border-color: #3b82f6;
-            background: #111827;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.08);
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+            opacity: 0;
+            transition: 0.4s;
         }
-        .category-icon {
+        .cat-card:hover::before {
+            opacity: 1;
+        }
+        .cat-card:hover {
+            border-color: rgba(59, 130, 246, 0.35);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .cat-card .icon {
             font-size: 34px;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
+            position: relative;
         }
-        .category-card h4 {
+        .cat-card h4 {
             font-size: 16px;
             font-weight: 700;
-            margin-bottom: 6px;
+            position: relative;
         }
-        .category-card p {
-            color: #64748b;
+        .cat-card p {
             font-size: 12px;
-            margin-bottom: 12px;
+            color: var(--muted);
+            margin: 4px 0 10px;
+            position: relative;
         }
-        .category-badge {
+        .cat-card .badge {
             display: inline-block;
-            background: rgba(59, 130, 246, 0.1);
-            color: #60a5fa;
-            padding: 3px 14px;
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--blue-light);
+            padding: 2px 14px;
             border-radius: 50px;
             font-size: 11px;
-            font-weight: 600;
+            position: relative;
         }
 
-        /* ====== PRODUCTS ====== */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 20px;
+        /* ==================== FLOW ==================== */
+        .flow-container {
+            display: none;
+            margin-top: 30px;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 30px;
+            border: 1px solid var(--border);
         }
-
-        .product-card {
-            background: #0f1422;
-            border-radius: 16px;
-            padding: 26px 24px;
-            border: 1px solid #1a2040;
-            transition: 0.3s;
+        .flow-container.active {
+            display: block;
+            animation: fadeUp 0.45s ease;
         }
-        .product-card:hover {
-            border-color: #3b82f6;
-            background: #111827;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.06);
+        .flow-step {
+            margin-bottom: 22px;
         }
-
-        .product-tag {
-            display: inline-block;
-            background: rgba(245, 158, 11, 0.08);
-            color: #f59e0b;
-            padding: 3px 12px;
-            border-radius: 50px;
-            font-size: 11px;
+        .flow-step h3 {
+            font-size: 17px;
             font-weight: 700;
             margin-bottom: 10px;
-        }
-
-        .product-card h4 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #f0f4ff;
-        }
-
-        .product-card .desc {
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 14px;
-            min-height: 38px;
-        }
-
-        .product-price {
-            font-size: 22px;
-            font-weight: 800;
-            color: #60a5fa;
-            margin-bottom: 16px;
-        }
-        .product-price .currency {
-            font-size: 14px;
-            color: #8892a8;
-            font-weight: 500;
-        }
-
-        .btn-order {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-        }
-        .btn-order:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-        }
-
-        /* ====== STEPS ====== */
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .step {
-            background: #0f1422;
-            border-radius: 16px;
-            padding: 30px 20px;
-            text-align: center;
-            border: 1px solid #1a2040;
-            position: relative;
-        }
-        .step-num {
-            position: absolute;
-            top: -12px;
-            right: 24px;
-            background: #3b82f6;
-            color: #fff;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
+            gap: 8px;
+        }
+        .flow-step h3 .num {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            font-weight: 800;
+            font-size: 13px;
+            color: #fff;
+        }
+
+        .service-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: #05080f;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
             font-size: 14px;
-        }
-        .step-icon {
-            font-size: 34px;
-            margin-bottom: 12px;
-        }
-        .step h4 {
-            font-size: 16px;
-            margin-bottom: 6px;
-        }
-        .step p {
-            color: #64748b;
-            font-size: 13px;
-        }
-
-        /* ====== SCANNER ====== */
-        .scanner-box {
-            background: #0f1422;
-            border-radius: 16px;
-            padding: 36px;
-            border: 1px solid #1a2040;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .scanner-box input[type="file"] {
-            display: none;
-        }
-        .scanner-label {
-            display: inline-block;
-            padding: 14px 36px;
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 15px;
+            font-family: 'Cairo', sans-serif;
             cursor: pointer;
-            transition: 0.3s;
-            margin-bottom: 16px;
         }
-        .scanner-label:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(139, 92, 246, 0.3);
-        }
-        .scan-result {
-            margin-top: 20px;
-            padding: 18px;
-            border-radius: 12px;
-            background: #080b16;
-            text-align: right;
-            display: none;
-            font-size: 13px;
-            border-right: 3px solid #3b82f6;
+        .service-select:focus {
+            outline: none;
+            border-color: var(--blue);
         }
 
-        /* ====== CONTACT ====== */
-        .contact-section {
-            background: #0c101c;
-            border-top: 1px solid #1a2040;
+        /* ==================== TEMPLATES ==================== */
+        .tpl-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        .tpl-card {
+            background: rgba(4, 7, 15, 0.5);
+            border-radius: 14px;
+            padding: 18px 12px;
             text-align: center;
-            padding: 50px 20px;
-        }
-        .contact-section h2 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-        .contact-section h2 .hl {
-            color: #60a5fa;
-        }
-        .contact-section p {
-            color: #64748b;
-            margin-bottom: 28px;
-        }
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .contact-buttons a {
-            padding: 14px 34px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 16px;
+            border: 1px solid var(--border);
             transition: 0.3s;
+            cursor: pointer;
         }
-        .contact-buttons a:hover {
+        .tpl-card:hover {
+            border-color: var(--blue);
+            background: rgba(59, 130, 246, 0.05);
             transform: translateY(-3px);
         }
-
-        .footer-bottom {
-            background: #060912;
-            padding: 20px;
-            text-align: center;
-            color: #475569;
-            font-size: 13px;
-            border-top: 1px solid #0f1422;
+        .tpl-card.selected {
+            border-color: var(--blue);
+            background: rgba(59, 130, 246, 0.12);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
         }
-
-        /* ====== MODAL ====== */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(4px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
+        .tpl-card .icon {
+            font-size: 28px;
         }
-        .modal-overlay.active {
-            display: flex;
-        }
-        .modal-box {
-            background: #111827;
-            border-radius: 20px;
-            padding: 34px;
-            max-width: 440px;
-            width: 90%;
-            border: 1px solid #1a2040;
-            animation: modalIn 0.25s ease;
-        }
-        @keyframes modalIn {
-            from {
-                transform: scale(0.92);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        .modal-box h3 {
-            font-size: 20px;
-            margin-bottom: 6px;
-            color: #f0f4ff;
-        }
-        .modal-box .product-name {
-            color: #60a5fa;
-            font-weight: 700;
-            margin-bottom: 18px;
-            font-size: 15px;
-        }
-        .modal-box .contact-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 22px 0;
-        }
-        .modal-box .contact-options a {
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 600;
-            text-align: center;
-            transition: 0.3s;
-            font-size: 15px;
-        }
-        .modal-close {
-            background: transparent;
-            border: 1px solid #3b82f6;
-            color: #60a5fa;
-            padding: 10px 26px;
-            border-radius: 10px;
-            cursor: pointer;
+        .tpl-card h5 {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
+            margin: 4px 0 2px;
+        }
+        .tpl-card p {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn-main {
+            display: inline-block;
+            padding: 10px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
             transition: 0.3s;
-            width: 100%;
         }
-        .modal-close:hover {
-            background: #3b82f6;
+        .btn-green {
+            background: linear-gradient(135deg, #10b981, #059669);
             color: #fff;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+        }
+        .btn-green:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
+        }
+        .btn-blue {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25);
+        }
+        .btn-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
         }
 
-        /* ====== RESPONSIVE ====== */
-        @media (max-width: 768px) {
-            .header {
-                padding: 14px 16px;
-                flex-direction: column;
-                gap: 10px;
-            }
-            .hero h1 {
-                font-size: 28px;
-            }
-            .hero p {
-                font-size: 15px;
-            }
-            .section-title {
-                font-size: 22px;
-            }
-            .categories-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            .contact-buttons a {
-                width: 100%;
-                text-align: center;
-            }
-            .modal-box {
-                padding: 22px;
-            }
+        /* ==================== RESULT ==================== */
+        .result-box {
+            display: none;
+            max-width: 520px;
+            margin: 30px auto;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            position: relative;
+            z-index: 5;
+        }
+        .result-box.active {
+            display: block;
+            animation: fadeUp 0.5s ease;
+        }
+        .result-box .big-icon {
+            font-size: 64px;
+            margin-bottom: 10px;
+        }
+        .result-box h3 {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .result-box p {
+            color: #94a3b8;
+            margin: 10px 0 24px;
+            line-height: 1.9;
         }
 
-        @media (max-width: 480px) {
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
+        /* ==================== FOOTER ==================== */
+        .foot {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 50px 20px 20px;
+        }
+        .foot h2 {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--blue-light), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .foot p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+        .footer-base {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+        }
+        .footer-base strong {
+            background: linear-gradient(135deg, var(--blue-light), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 34px; }
+            .stats-row { gap: 30px; }
+            .stat-item .num { font-size: 34px; }
+            .header { padding: 12px 16px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ====== HEADER ====== -->
-   <header style="display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; background-color: #0f141c; border-bottom: 1px solid #1e2633; direction: rtl; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
-        
-        <div class="logo-area" style="display: flex; align-items: center;">
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
-                <img src="photo_5321489068891774320_y.jpg" alt="BASCODE Logo" style="height: 70px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 10px rgba(0,0,0,0.5));">
-            </a>
-        </div>
+    <!-- ============ CANVAS ============ -->
+    <canvas id="particleCanvas"></canvas>
 
-        <div class="nav-buttons" style="display: flex; gap: 15px; align-items: center;">
-            
-            <a href="https://wa.me/9647701234567" target="_blank" style="display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-size: 0.95rem; font-weight: bold; box-shadow: 0 4px 15px rgba(37,211,102,0.2); transition: 0.3s; font-family: 'Cairo', sans-serif;">
-                💬 تواصل واتساب
-            </a>
-
-            <a href="mailto:abdulbasetnaidi-ux@github.io" style="display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #007bb5, #005983); color: white; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-size: 0.95rem; font-weight: bold; box-shadow: 0 4px 15px rgba(0,123,181,0.2); transition: 0.3s; font-family: 'Cairo', sans-serif;">
-                ✉️ مراسلة عبر الإيميل
-            </a>
-            
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-box">B</div>
+            <div class="logo-text">BASCOE<span>.</span></div>
         </div>
     </header>
 
-
-    <!-- ====== HERO ====== -->
+    <!-- ============ HERO ============ -->
     <section class="hero">
-        <div class="hero-badge">✦ أكثر من 50 خدمة رقمية احترافية</div>
-        <h1>سوق الخدمات الرقمية<br>المتكامل</h1>
-        <p>برامج، تطوير، قوالب، أكواد مصدرية، ترجمة، تحليل بيانات، فحص ملفات — كل ما تحتاجه في مكان واحد</p>
-        <div class="hero-stats">
-            <div><strong>+50</strong><span>خدمة متوفرة</span></div>
-            <div><strong>فوري</strong><span>تواصل مباشر</span></div>
-            <div><strong>٩٩٪</strong><span>عملاء راضون</span></div>
-        </div>
+        <h1>BASCOE</h1>
+        <p>منصة الخدمات الرقمية المتكاملة — اختر، قارن، واطلب بكل ثقة</p>
     </section>
 
-    <!-- ====== CATEGORIES ====== -->
-    <section class="section" id="categories">
-        <h2 class="section-title">الأقسام <span class="hl">الرئيسية</span></h2>
-        <div class="section-divider"></div>
-        <p class="section-sub">اضغط على القسم لتصفية الخدمات</p>
-        <div class="categories-grid" id="categoriesGrid"></div>
-    </section>
+    <!-- ============ STATS ============ -->
+    <div class="stats-row" id="statsRow">
+        <div class="stat-item"><div class="num" data-target="15">0</div><div class="label">قسم</div></div>
+        <div class="stat-item"><div class="num" data-target="130">0</div><div class="label">خدمة</div></div>
+        <div class="stat-item"><div class="num" data-target="650">0</div><div class="label">نموذج</div></div>
+        <div class="stat-item"><div class="num" data-target="2800">0</div><div class="label">عميل</div></div>
+    </div>
 
-    <!-- ====== PRODUCTS ====== -->
-    <section class="section" id="products">
-        <h2 class="section-title">الخدمات <span class="hl">المتوفرة</span></h2>
-        <div class="section-divider"></div>
-        <p class="section-sub">اختر الخدمة التي تريدها وسأتواصل معك فوراً</p>
-        <div class="products-grid" id="productsGrid"></div>
-    </section>
+    <!-- ============ CATEGORIES ============ -->
+    <div class="section" id="catSection">
+        <h2 class="section-title">تصفح <span class="hl">الأقسام</span></h2>
+        <p class="section-sub">اختر القسم الذي يناسب احتياجك</p>
+        <div class="section-line"></div>
+        <div class="cat-grid" id="catGrid"></div>
+    </div>
 
-    <!-- ====== HOW IT WORKS ====== -->
-    <section class="section" id="how">
-        <h2 class="section-title">كيف <span class="hl">تطلب</span></h2>
-        <div class="section-divider"></div>
-        <p class="section-sub">ثلاث خطوات والخدمة جاهزة</p>
-        <div class="steps">
-            <div class="step">
-                <span class="step-num">١</span>
-                <div class="step-icon">👆</div>
-                <h4>اختر الخدمة</h4>
-                <p>تصفح الأقسام واختر ما تحتاجه</p>
+    <!-- ============ FLOW ============ -->
+    <div class="section" id="flowSection">
+        <div class="flow-container" id="flowContainer">
+            <div class="flow-step">
+                <h3><span class="num">١</span> اختر الخدمة</h3>
+                <select class="service-select" id="serviceSelect" onchange="onServiceChange()">
+                    <option value="">-- اختر خدمة --</option>
+                </select>
             </div>
-            <div class="step">
-                <span class="step-num">٢</span>
-                <div class="step-icon">💬</div>
-                <h4>تواصل مباشر</h4>
-                <p>اضغط على الخدمة ويتواصل معك واتساب</p>
+            <div class="flow-step" id="tplStep" style="display:none;">
+                <h3><span class="num">٢</span> اختر النموذج المناسب</h3>
+                <div class="tpl-grid" id="tplGrid"></div>
             </div>
-            <div class="step">
-                <span class="step-num">٣</span>
-                <div class="step-icon">⚡</div>
-                <h4>تجهيز الطلب</h4>
-                <p>أرد عليك فوراً وأجهز الخدمة</p>
+            <div class="flow-step" id="orderStep" style="display:none;text-align:center;">
+                <button class="btn-main btn-green" onclick="submitOrder()">✅ أطلب الخدمة</button>
             </div>
         </div>
-    </section>
 
-    <!-- ====== FILE SCANNER ====== -->
-    <section class="section" id="scanner">
-        <h2 class="section-title">🔍 فحص <span class="hl">الملفات</span></h2>
-        <div class="section-divider"></div>
-        <p class="section-sub">ارفع ملف JS, HTML, PHP, Python أو أي كود للفحص الأمني</p>
-        <div class="scanner-box">
-            <label for="fileInput" class="scanner-label">📁 اختر ملف</label>
-            <input type="file" id="fileInput" accept=".js,.html,.htm,.php,.py,.java,.cpp,.c,.cs,.rb,.go,.ts,.jsx,.tsx,.vue,.svelte,.sql,.xml,.json,.yaml,.yml,.sh,.bash,.ps1,.bat,.css,.scss,.less" />
-            <div id="scanResult" class="scan-result"></div>
-        </div>
-    </section>
-
-    <!-- ====== CONTACT ====== -->
-    <section class="contact-section" id="contact">
-        <h2>تواصل معي <span class="hl">مباشرة</span></h2>
-        <p>بدون تعقيد — اختر الخدمة وتواصل معي على الفور</p>
-        <div class="contact-buttons">
-            <a href="https://wa.me/966500000000?text=مرحباً%20أريد%20الاستفسار%20عن%20خدماتكم" class="btn-whatsapp" target="_blank" style="background:#22c55e;color:#fff;">💬 تواصل واتساب</a>
-            <a href="mailto:admin@example.com?subject=طلب%20خدمة%20رقمية" class="btn-email" target="_blank" style="background:#3b82f6;color:#fff;">✉️ راسلني عبر البريد</a>
-        </div>
-    </section>
-
-    <footer class="footer-bottom">
-        © 2026 المتجر الرقمي — تواصل مباشر بدون وسطاء
-    </footer>
-
-    <!-- ====== MODAL ====== -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-box">
-            <h3>✅ تم اختيار الخدمة</h3>
-            <p class="product-name" id="modalProductName">اسم الخدمة</p>
-            <p style="color:#64748b;font-size:14px;">اختر وسيلة التواصل وسأرد عليك فوراً:</p>
-            <div class="contact-options">
-                <a href="#" id="modalWhatsapp" target="_blank" class="btn-whatsapp" style="background:#22c55e;color:#fff;text-align:center;">
-                    💬 أرسل عبر واتساب
-                </a>
-                <a href="#" id="modalEmail" target="_blank" class="btn-email" style="background:#3b82f6;color:#fff;text-align:center;">
-                    ✉️ أرسل عبر البريد
-                </a>
-            </div>
-            <button class="modal-close" onclick="closeModal()">إلغاء</button>
+        <div class="result-box" id="resultBox">
+            <div class="big-icon">✅</div>
+            <h3>تم اختيار الخدمة!</h3>
+            <p id="resultText">الخدمة: -</p>
+            <button class="btn-main btn-blue" onclick="sendEmail()">📧 أرسل عبر البريد</button>
+            <br><br>
+            <button class="btn-main" style="background:transparent;border:1px solid var(--muted);color:var(--muted);" onclick="resetAll()">طلب جديد</button>
         </div>
     </div>
 
+    <!-- ============ FOOTER ============ -->
+    <section class="foot">
+        <h2>BASCOE<span>.</span></h2>
+        <p>منصة الخدمات الرقمية المتكاملة — اختر، قارن، واطلب بكل ثقة</p>
+    </section>
+    <footer class="footer-base">© 2026 <strong>BASCOE</strong> — جميع الحقوق محفوظة.</footer>
+
     <script>
-        // =============================================
-        // DATA
-        // =============================================
-        const categories = [{
-            id: 'software',
-            icon: '💻',
-            title: 'برامج وتطبيقات',
-            desc: 'برامج سطح مكتب وتطبيقات موبايل'
-        }, {
-            id: 'dev',
-            icon: '⚙️',
-            title: 'تطوير مخصص',
-            desc: 'برمجة أنظمة حسب طلبك'
-        }, {
-            id: 'templates',
-            icon: '🎨',
-            title: 'قوالب برمجية',
-            desc: 'HTML, CSS, JS, React, Vue, Angular'
-        }, {
-            id: 'source',
-            icon: '📦',
-            title: 'أكواد ومشاريع',
-            desc: 'جميع لغات البرمجة — مشاريع كاملة'
-        }, {
-            id: 'translate',
-            icon: '🌐',
-            title: 'ترجمة احترافية',
-            desc: 'ملفات، كتب، وثائق، مواقع'
-        }, {
-            id: 'analytics',
-            icon: '📊',
-            title: 'تحليل البيانات',
-            desc: 'تقارير للشركات وداشبوردات'
-        }, {
-            id: 'security',
-            icon: '🔒',
-            title: 'فحص الكود والملفات',
-            desc: 'فحص أمني لجميع اللغات'
-        }];
+        // ==================== CONFIG ====================
+        const CONFIG = { email: 'admin@bascoe.com' };
 
-        const products = [{
-            id: 1,
-            category: 'software',
-            tag: 'برامج',
-            name: 'برنامج إدارة المشاريع',
-            desc: 'نظام كامل لإدارة المهام والفريق',
-            price: '150'
-        }, {
-            id: 2,
-            category: 'software',
-            tag: 'برامج',
-            name: 'برنامج محاسبة متكامل',
-            desc: 'فواتير، مخزون، عملاء — واجهة عربية',
-            price: '200'
-        }, {
-            id: 3,
-            category: 'dev',
-            tag: 'تطوير',
-            name: 'نظام مخصص حسب الطلب',
-            desc: 'أي نظام تريده — ويب أو تطبيق',
-            price: 'من 300'
-        }, {
-            id: 4,
-            category: 'dev',
-            tag: 'تطوير',
-            name: 'تطوير API و Backend',
-            desc: 'Node.js, Python, PHP — REST API',
-            price: 'من 250'
-        }, {
-            id: 5,
-            category: 'templates',
-            tag: 'قوالب',
-            name: 'قالب متجر إلكتروني',
-            desc: 'HTML/CSS/JS — متجاوب وجاهز',
-            price: '75'
-        }, {
-            id: 6,
-            category: 'templates',
-            tag: 'قوالب',
-            name: 'قالب لوحة تحكم Admin',
-            desc: 'داشبورد احترافي مع جميع المكونات',
-            price: '85'
-        }, {
-            id: 7,
-            category: 'source',
-            tag: 'أكواد',
-            name: 'نظام تسجيل دخول كامل',
-            desc: 'PHP + MySQL — صلاحيات وأمان',
-            price: '40'
-        }, {
-            id: 8,
-            category: 'source',
-            tag: 'أكواد',
-            name: 'بوت تيليجرام متكامل',
-            desc: 'Python — مع قاعدة بيانات',
-            price: '60'
-        }, {
-            id: 9,
-            category: 'source',
-            tag: 'أكواد',
-            name: 'تطبيق React Native',
-            desc: 'كود كامل + واجهة مستخدم احترافية',
-            price: '120'
-        }, {
-            id: 10,
-            category: 'translate',
-            tag: 'ترجمة',
-            name: 'ترجمة وثائق PDF',
-            desc: 'ترجمة احترافية لأي لغة',
-            price: 'حسب الصفحات'
-        }, {
-            id: 11,
-            category: 'translate',
-            tag: 'ترجمة',
-            name: 'ترجمة الملفات  ',
-            desc: 'خدمة ترجمة احترافية عالية الجودة للكتب والملفات والمجلات الرقمية بمختلف اللغات',
-            price: ' من 50'
-        }, {
-            id: 12,
-            category: 'analytics',
-            tag: 'تحليل',
-            name: 'تقرير تحليل بيانات شامل',
-            desc: 'رسوم بيانية وتوصيات لشركتك',
-            price: 'من 200'
-        }, {
-            id: 13,
-            category: 'analytics',
-            tag: 'تحليل',
-            name: 'داشبورد تفاعلي للشركات',
-            desc: 'لوحة تحكم تحليلات حية',
-            price: 'من 300'
-        }, {
-            id: 14,
-            category: 'security',
-            tag: 'فحص',
-            name: 'فحص أمني للموقع',
-            desc: 'فحص شامل للثغرات + تقرير',
-            price: 'من 150'
-        }, {
-            id: 15,
-            category: 'security',
-            tag: 'فحص',
-            name: 'فحص ملفات (JS/HTML/PHP)',
-            desc: 'كشف الثغرات والكود الخبيث',
-            price: '25 - 100'
-        }];
-
-        // =============================================
-        // CONFIG — غير الرقم والبريد هنا
-        // =============================================
-        const CONFIG = {
-            whatsapp: '',
-            email: 'abdulbasthmaidi@gmail.com'
+        // ==================== DATA ====================
+        const categories = {
+            web: { title: '🌐 تطوير مواقع الويب', icon: '🌐',
+                services: [{ name: 'موقع شركة أو شخصي', desc: '5 صفحات متكاملة', price: '$200',
+                    templates: [{ icon: '🏢', name: 'كلاسيك', desc: 'تقليدي أنيق' }, { icon: '✨', name: 'مودرن',
+                        desc: 'عصري جريء' }, { icon: '🎯', name: 'ميني مال', desc: 'بسيط سريع' }, { icon: '🌟',
+                        name: 'بريميوم', desc: 'فخم احترافي' }, { icon: '📱', name: 'موبايل فرست',
+                        desc: 'أولوية الجوال' }] },
+                { name: 'صفحة هبوط Landing', desc: 'صفحة تسويقية عالية التحويل', price: '$80',
+                    templates: [{ icon: '🎬', name: 'هيرو', desc: 'فيديو خلفية' }, { icon: '📝', name: 'تسويقية',
+                        desc: 'نصوص مقنعة' }, { icon: '🖼️', name: 'بصرية', desc: 'صور عالية' }, { icon: '📊',
+                        name: 'سيلز', desc: 'للمبيعات' }, { icon: '🚀', name: 'لانش', desc: 'إطلاق منتج' }] },
+                { name: 'متجر إلكتروني', desc: 'متجر كامل مع سلة مشتريات', price: '$400',
+                    templates: [{ icon: '👕', name: 'أزياء', desc: 'للملابس' }, { icon: '📱', name: 'إلكترونيات',
+                        desc: 'للتقنية' }, { icon: '🪑', name: 'أثاث', desc: 'للمنزل' }, { icon: '🍔', name: 'مطعم',
+                        desc: 'للطعام' }, { icon: '📚', name: 'مكتبة', desc: 'للكتب' }] }] },
+            mobile: { title: '📱 تطبيقات الموبايل', icon: '📱',
+                services: [{ name: 'تطبيق Android', desc: 'تطبيق أصلي Kotlin', price: '$600',
+                    templates: [{ icon: '📱', name: 'متجر', desc: 'تسوق إلكتروني' }, { icon: '💬', name: 'تواصل',
+                        desc: 'محادثات فورية' }, { icon: '📅', name: 'حجوزات', desc: 'حجز مواعيد' }, { icon: '🎮',
+                        name: 'ألعاب', desc: 'ألعاب ترفيهية' }, { icon: '🏋️', name: 'صحي', desc: 'لياقة ورياضة' }] },
+                { name: 'تطبيق iOS', desc: 'تطبيق أصلي Swift', price: '$700', templates: [{ icon: '📱', name: 'متجر',
+                        desc: 'تسوق إلكتروني' }, { icon: '🎵', name: 'موسيقى', desc: 'تطبيق صوتيات' }, { icon: '📸',
+                        name: 'تصوير', desc: 'كاميرا وفلاتر' }, { icon: '📍', name: 'خرائط',
+                        desc: 'ملاحة ومواقع' }, { icon: '📖', name: 'تعليم', desc: 'دورات تعليمية' }] }] },
+            templates: { title: '🎨 قوالب برمجية', icon: '🎨',
+                services: [{ name: 'قالب HTML/CSS', desc: 'قالب موقع جاهز للتعديل', price: '$35',
+                    templates: [{ icon: '🏢', name: 'شركة', desc: 'Business Site' }, { icon: '👤', name: 'شخصي',
+                        desc: 'Portfolio' }, { icon: '📝', name: 'مدونة', desc: 'Blog Layout' }, { icon: '🍽️',
+                        name: 'مطعم', desc: 'Restaurant' }, { icon: '🏥', name: 'صحي', desc: 'Clinic' }] },
+                { name: 'قالب Dashboard', desc: 'لوحة تحكم إدارية', price: '$55', templates: [{ icon: '📊',
+                        name: 'تحليلات', desc: 'Charts & Stats' }, { icon: '📦', name: 'مخزون', desc: 'Inventory' },
+                    { icon: '👥', name: 'عملاء', desc: 'CRM System' }, { icon: '💰', name: 'مالي', desc: 'Finance' },
+                    { icon: '🎓', name: 'تعليمي', desc: 'LMS Platform' }] }] },
+            graphic: { title: '🖌️ تصميم جرافيك', icon: '🖌️',
+                services: [{ name: 'تصميم شعار', desc: 'شعار فريد لهويتك البصرية', price: '$50',
+                    templates: [{ icon: '🔤', name: 'نصي', desc: 'باستخدام الحروف' }, { icon: '🎯', name: 'أيقوني',
+                        desc: 'رمز مع نص' }, { icon: '🖼️', name: 'مصغر', desc: 'Minimal' }, { icon: '🎨', name: 'ملون',
+                        desc: 'جريء بالألوان' }, { icon: '✒️', name: 'كلاسيك', desc: 'تقليدي أنيق' }] },
+                { name: 'هوية بصرية كاملة', desc: 'شعار، بطاقات، ألوان، خطوط', price: '$150', templates: [{ icon: '🎯',
+                        name: 'عصرية', desc: 'Modern Identity' }, { icon: '🏛️', name: 'فخمة',
+                        desc: 'Luxury Brand' }, { icon: '🎪', name: 'مرحة', desc: 'Playful Design' }, { icon: '📈',
+                        name: 'شركات', desc: 'Corporate' }, { icon: '🌿', name: 'طبيعية',
+                        desc: 'Earthy Tones' }] }] },
+            marketing: { title: '📢 التسويق الرقمي', icon: '📢',
+                services: [{ name: 'حملة SEO متكاملة', desc: 'تحسين ظهورك في محركات البحث', price: '$250',
+                    templates: [{ icon: '🔍', name: 'كلاسيك', desc: 'SEO تقليدي' }, { icon: '📝', name: 'محتوى',
+                        desc: 'Content SEO' }, { icon: '🔗', name: 'روابط', desc: 'Link Building' }, { icon: '🏠',
+                        name: 'تقني', desc: 'Technical SEO' }, { icon: '🌍', name: 'محلي', desc: 'Local SEO' }] },
+                { name: 'إدارة سوشيال ميديا', desc: 'إدارة حسابات التواصل', price: '$350', templates: [{ icon: '📸',
+                        name: 'إنستغرام', desc: 'Instagram' }, { icon: '📘', name: 'فيسبوك', desc: 'Facebook' },
+                    { icon: '🐦', name: 'تويتر', desc: 'Twitter / X' }, { icon: '💼', name: 'لينكدإن',
+                        desc: 'LinkedIn' }, { icon: '🎵', name: 'تيك توك', desc: 'TikTok' }] }] },
+            backend: { title: '⚙️ تطوير Backend', icon: '⚙️',
+                services: [{ name: 'API مع Node.js', desc: 'REST API كامل مع Express', price: '$300',
+                    templates: [{ icon: '📦', name: 'Express', desc: 'إطار خفيف' }, { icon: '🔒', name: 'Auth API',
+                        desc: 'مصادقة' }, { icon: '🗄️', name: 'CRUD', desc: 'عمليات قاعدة' }, { icon: '📤',
+                        name: 'File Upload', desc: 'رفع ملفات' }, { icon: '🔗', name: 'Integration',
+                        desc: 'ربط خارجي' }] },
+                { name: 'API مع Laravel', desc: 'PHP Backend متكامل', price: '$350', templates: [{ icon: '🔐',
+                        name: 'Auth', desc: 'تسجيل دخول' }, { icon: '📊', name: 'Dashboard', desc: 'لوحة تحكم' },
+                    { icon: '🛒', name: 'Ecommerce', desc: 'متجر' }, { icon: '📰', name: 'Blog', desc: 'مدونة' },
+                    { icon: '📋', name: 'CRM', desc: 'إدارة عملاء' }] }] },
+            ai: { title: '🤖 الذكاء الاصطناعي', icon: '🤖',
+                services: [{ name: 'Chatbot ذكي', desc: 'بوت محادثة لموقعك', price: '$250', templates: [{ icon: '💬',
+                        name: 'دعم فني', desc: 'Customer Support' }, { icon: '🛒', name: 'مبيعات',
+                        desc: 'Sales Bot' }, { icon: '🎓', name: 'تعليمي', desc: 'Tutor Bot' }, { icon: '🏥',
+                        name: 'صحي', desc: 'Health Bot' }, { icon: '🏦', name: 'مالي', desc: 'Finance Bot' }] },
+                { name: 'معالجة نصوص NLP', desc: 'تحليل نصوص ولغة طبيعية', price: '$400', templates: [{ icon: '😊',
+                        name: 'تحليل مشاعر', desc: 'Sentiment' }, { icon: '📄', name: 'تلخيص',
+                        desc: 'Summarizer' }, { icon: '🌍', name: 'ترجمة', desc: 'Translation' }, { icon: '🔍',
+                        name: 'بحث', desc: 'Search Engine' }, { icon: '🏷️', name: 'تصنيف',
+                        desc: 'Classification' }] }] },
+            security: { title: '🔒 الأمن السيبراني', icon: '🔒',
+                services: [{ name: 'اختبار اختراق', desc: 'Pentest شامل مع تقرير', price: '$400',
+                    templates: [{ icon: '🌐', name: 'ويب', desc: 'Web App' }, { icon: '📱', name: 'موبايل',
+                        desc: 'Mobile App' }, { icon: '🔌', name: 'API', desc: 'API Pentest' }, { icon: '🏢',
+                        name: 'شبكة', desc: 'Network' }, { icon: '☁️', name: 'سحابي', desc: 'Cloud' }] },
+                { name: 'فحص ثغرات أمنية', desc: 'Vulnerability Assessment', price: '$200', templates: [{ icon: '📊',
+                        name: 'OWASP', desc: 'Top 10' }, { icon: '🔍', name: 'كود', desc: 'Code Review' },
+                    { icon: '🔐', name: 'SSL/TLS', desc: 'تشفير' }, { icon: '🛡️', name: 'جدار ناري',
+                        desc: 'Firewall' }, { icon: '📋', name: 'امتثال', desc: 'Compliance' }] }] },
+            ecommerce: { title: '🛒 متاجر إلكترونية', icon: '🛒',
+                services: [{ name: 'متجر Shopify', desc: 'تصميم وإعداد متجر Shopify', price: '$350',
+                    templates: [{ icon: '👕', name: 'أزياء', desc: 'Fashion' }, { icon: '📱', name: 'إلكترونيات',
+                        desc: 'Electronics' }, { icon: '💎', name: 'مجوهرات', desc: 'Jewelry' }, { icon: '🏠',
+                        name: 'ديكور', desc: 'Home Decor' }, { icon: '🎁', name: 'هدايا', desc: 'Gifts' }] },
+                { name: 'متجر WooCommerce', desc: 'متجر على ووردبريس', price: '$280', templates: [{ icon: '📚',
+                        name: 'كتب', desc: 'Books' }, { icon: '🎵', name: 'موسيقى', desc: 'Music' }, { icon: '👶',
+                        name: 'أطفال', desc: 'Kids Products' }, { icon: '🐾', name: 'حيوانات', desc: 'Pets' },
+                    { icon: '🏋️', name: 'رياضة', desc: 'Sports' }] }] },
+            translation: { title: '🌍 ترجمة احترافية', icon: '🌍',
+                services: [{ name: 'ترجمة مستندات PDF', desc: 'ترجمة دقيقة مع مراجعة', price: '$50',
+                    templates: [{ icon: '📄', name: 'قانونية', desc: 'Legal' }, { icon: '📋', name: 'طبية',
+                        desc: 'Medical' }, { icon: '🔧', name: 'تقنية', desc: 'Technical' }, { icon: '🎓',
+                        name: 'أكاديمية', desc: 'Academic' }, { icon: '💼', name: 'تجارية', desc: 'Business' }] },
+                { name: 'ترجمة مواقع كاملة', desc: 'ترجمة واجهات ومحتوى', price: '$150', templates: [{ icon: '🌐',
+                        name: 'شركة', desc: 'Corporate' }, { icon: '🛒', name: 'متجر', desc: 'Ecommerce' },
+                    { icon: '📝', name: 'مدونة', desc: 'Blog' }, { icon: '🎓', name: 'تعليمي',
+                        desc: 'Educational' }, { icon: '🏥', name: 'صحي', desc: 'Healthcare' }] }] },
+            data: { title: '📊 تحليل البيانات', icon: '📊',
+                services: [{ name: 'داشبورد Power BI', desc: 'لوحة تحكم تفاعلية', price: '$350', templates: [{ icon: '💰',
+                        name: 'مالي', desc: 'Financial' }, { icon: '📈', name: 'مبيعات', desc: 'Sales' },
+                    { icon: '👥', name: 'موارد', desc: 'HR' }, { icon: '📦', name: 'مخزون', desc: 'Inventory' },
+                    { icon: '📊', name: 'تسويق', desc: 'Marketing' }] },
+                { name: 'تقرير Excel متقدم', desc: 'جداول محورية ورسوم بيانية', price: '$100', templates: [{ icon: '📉',
+                        name: 'ميزانية', desc: 'Budget' }, { icon: '📋', name: 'مصاريف', desc: 'Expenses' },
+                    { icon: '📊', name: 'مقارنة', desc: 'Comparison' }, { icon: '📅', name: 'شهري',
+                        desc: 'Monthly Report' }, { icon: '📈', name: 'سنوي', desc: 'Annual Report' }] }] },
+            consultation: { title: '💡 استشارات تقنية', icon: '💡',
+                services: [{ name: 'استشارة تقنية', desc: 'جلسة استشارية لمشروعك', price: '$80', templates: [{ icon: '💻',
+                        name: 'تقنية', desc: 'Tech Consult' }, { icon: '🏗️', name: 'هندسة',
+                        desc: 'Architecture' }, { icon: '🛡️', name: 'أمنية', desc: 'Security' }, { icon: '🚀',
+                        name: 'إطلاق', desc: 'Product Launch' }, { icon: '💰', name: 'تكلفة',
+                        desc: 'Cost Estimation' }] },
+                { name: 'مراجعة كود Code Review', desc: 'تدقيق أمان وجودة الكود', price: '$120', templates: [{ icon: '🔒',
+                        name: 'أمن', desc: 'Security' }, { icon: '⚡', name: 'أداء', desc: 'Performance' },
+                    { icon: '📐', name: 'جودة', desc: 'Quality' }, { icon: '🧪', name: 'اختبارات',
+                        desc: 'Testing' }, { icon: '📋', name: 'Best Practices', desc: 'ممارسات' }] }] }
         };
 
-        // =============================================
-        // RENDER
-        // =============================================
-        function renderCategories() {
-            const grid = document.getElementById('categoriesGrid');
-            grid.innerHTML = categories.map(c => `
-                        <div class="category-card" onclick="filterProducts('${c.id}')">
-                            <div class="category-icon">${c.icon}</div>
-                            <h4>${c.title}</h4>
-                            <p>${c.desc}</p>
-                            <span class="category-badge">${products.filter(p => p.category === c.id).length} خدمات</span>
-                        </div>
-                    `).join('');
+        // ==================== STATE ====================
+        let currentCatKey = null,
+            currentSvcIdx = null,
+            selectedTplIdx = null,
+            orderInfo = null;
+
+        // ==================== RENDER CATS ====================
+        function renderCats() {
+            const grid = document.getElementById('catGrid');
+            grid.innerHTML = '';
+            Object.keys(categories).forEach(key => {
+                const cat = categories[key];
+                const div = document.createElement('div');
+                div.className = 'cat-card';
+                div.innerHTML = `
+                    <div class="icon">${cat.icon}</div>
+                    <h4>${cat.title.replace(/^[^\s]+\s/, '')}</h4>
+                    <p>${cat.services.length} خدمات متوفرة</p>
+                    <span class="badge">${cat.services.length}</span>
+                `;
+                div.onclick = () => selectCategory(key);
+                grid.appendChild(div);
+            });
         }
 
-        function renderProducts(filter) {
-            const grid = document.getElementById('productsGrid');
-            let filtered = filter ? products.filter(p => p.category === filter) : products;
+        function selectCategory(key) {
+            currentCatKey = key;
+            currentSvcIdx = null;
+            selectedTplIdx = null;
+            const cat = categories[key];
+            const sel = document.getElementById('serviceSelect');
+            sel.innerHTML = '<option value="">-- اختر خدمة --</option>';
+            cat.services.forEach((svc, i) => {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = `${svc.name} — ${svc.price}`;
+                sel.appendChild(opt);
+            });
+            document.getElementById('tplStep').style.display = 'none';
+            document.getElementById('orderStep').style.display = 'none';
+            document.getElementById('flowContainer').classList.add('active');
+            document.getElementById('resultBox').classList.remove('active');
+            document.getElementById('flowSection').scrollIntoView({ behavior: 'smooth' });
+        }
 
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">
-                            لا توجد خدمات في هذا القسم حالياً
-                        </div>`;
+        function onServiceChange() {
+            const sel = document.getElementById('serviceSelect');
+            const idx = parseInt(sel.value);
+            if (isNaN(idx) || !currentCatKey) {
+                document.getElementById('tplStep').style.display = 'none';
+                document.getElementById('orderStep').style.display = 'none';
                 return;
             }
-
-            grid.innerHTML = filtered.map(p => `
-                        <div class="product-card">
-                            <span class="product-tag">${p.tag}</span>
-                            <h4>${p.name}</h4>
-                            <p class="desc">${p.desc}</p>
-                            <div class="product-price">$${p.price} <span class="currency">دولار</span></div>
-                            <button class="btn-order" onclick="openOrderModal(${p.id})">
-                                🛒 أطلب الخدمة
-                            </button>
-                        </div>
-                    `).join('');
-        }
-
-        function filterProducts(categoryId) {
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-            renderProducts(categoryId);
-            // أضف كلاس نشط للقسم المختار
-            document.querySelectorAll('.category-card').forEach(card => {
-                card.style.borderColor = '#1a2040';
-                card.style.background = '#0f1422';
+            currentSvcIdx = idx;
+            selectedTplIdx = null;
+            const svc = categories[currentCatKey].services[idx];
+            const grid = document.getElementById('tplGrid');
+            grid.innerHTML = '';
+            svc.templates.forEach((t, ti) => {
+                const div = document.createElement('div');
+                div.className = 'tpl-card';
+                div.dataset.tpl = ti;
+                div.innerHTML = `<div class="icon">${t.icon}</div><h5>${t.name}</h5><p>${t.desc}</p>`;
+                div.onclick = () => selectTemplate(ti);
+                grid.appendChild(div);
             });
-            // Highlight the selected
-            const cards = document.querySelectorAll('.category-card');
-            categories.forEach((c, i) => {
-                if (c.id === categoryId && cards[i]) {
-                    cards[i].style.borderColor = '#3b82f6';
-                    cards[i].style.background = '#111827';
-                }
+            document.getElementById('tplStep').style.display = 'block';
+            document.getElementById('orderStep').style.display = 'none';
+        }
+
+        function selectTemplate(ti) {
+            selectedTplIdx = ti;
+            document.querySelectorAll('.tpl-card').forEach(c => c.classList.remove('selected'));
+            const el = document.querySelector(`.tpl-card[data-tpl="${ti}"]`);
+            if (el) el.classList.add('selected');
+            document.getElementById('orderStep').style.display = 'block';
+        }
+
+        function submitOrder() {
+            if (!currentCatKey || currentSvcIdx === null || selectedTplIdx === null) return;
+            const cat = categories[currentCatKey],
+                svc = cat.services[currentSvcIdx],
+                tpl = svc.templates[selectedTplIdx];
+            orderInfo = { category: cat.title, service: svc.name, price: svc.price, template: tpl.name,
+                templateDesc: tpl.desc };
+            document.getElementById('resultText').innerHTML =
+                `<strong>📌 ${orderInfo.service}</strong><br>💰 ${orderInfo.price} دولار<br>🎨 النموذج: ${orderInfo.template} — ${orderInfo.templateDesc}`;
+            document.getElementById('flowContainer').classList.remove('active');
+            document.getElementById('resultBox').classList.add('active');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function sendEmail() {
+            if (!orderInfo) return;
+            const sub = encodeURIComponent(`طلب خدمة BASCOE: ${orderInfo.service}`);
+            const body = encodeURIComponent(
+                `مرحباً BASCOE 👋\n\nأود طلب الخدمة التالية:\n\n📌 الخدمة: ${orderInfo.service}\n💰 السعر: ${orderInfo.price}\n🎨 النموذج: ${orderInfo.template} — ${orderInfo.templateDesc}\n📂 القسم: ${orderInfo.category}\n\nأرجو التواصل معي لتأكيد الطلب.\nشكراً!`);
+            window.open(`mailto:${CONFIG.email}?subject=${sub}&body=${body}`, '_blank');
+        }
+
+        function resetAll() {
+            document.getElementById('resultBox').classList.remove('active');
+            document.getElementById('flowContainer').classList.remove('active');
+            currentCatKey = null;
+            currentSvcIdx = null;
+            selectedTplIdx = null;
+            orderInfo = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== COUNTER ANIMATION ====================
+        function animateCounters() {
+            document.querySelectorAll('.stat-item .num').forEach(el => {
+                const target = parseInt(el.dataset.target);
+                const duration = 2000;
+                const start = performance.now();
+                const step = (now) => {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(eased * target);
+                    if (progress < 1) requestAnimationFrame(step);
+                    else el.textContent = target.toLocaleString();
+                };
+                requestAnimationFrame(step);
             });
-            // زر إظهار الكل
-            showAllBtn();
         }
 
-        function showAllProducts() {
-            renderProducts(null);
-            document.querySelectorAll('.category-card').forEach(card => {
-                card.style.borderColor = '#1a2040';
-                card.style.background = '#0f1422';
-            });
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-            // حذف زر إظهار الكل
-            const btn = document.getElementById('showAllBtn');
-            if (btn) btn.remove();
-        }
+        // ==================== PARTICLE CANVAS ====================
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [],
+            mouse = { x: -9999, y: -9999 };
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        function showAllBtn() {
-            const old = document.getElementById('showAllBtn');
-            if (old) old.remove();
-            const btn = document.createElement('div');
-            btn.id = 'showAllBtn';
-            btn.style.textAlign = 'center';
-            btn.style.marginTop = '20px';
-            btn.innerHTML =
-                `<button onclick="showAllProducts()" style="background:transparent;border:1px solid #3b82f6;color:#60a5fa;padding:10px 30px;border-radius:10px;cursor:pointer;font-weight:600;font-size:14px;">
-                            ✕ عرض جميع الخدمات
-                        </button>`;
-            document.getElementById('products').appendChild(btn);
-        }
-
-        // =============================================
-        // MODAL
-        // =============================================
-        function openOrderModal(productId) {
-            const p = products.find(x => x.id === productId);
-            if (!p) return;
-
-            document.getElementById('modalProductName').textContent = `${p.name} — $${p.price} دولار`;
-
-            const msg = encodeURIComponent(
-                `مرحباً 👋\n\nأريد طلب:\n📌 ${p.name}\n💰 $${p.price} دولار\n📝 ${p.desc}\n\nأرجو التواصل معي للتجهيز.`
-            );
-
-            document.getElementById('modalWhatsapp').href = `https://wa.me/${CONFIG.whatsapp}?text=${msg}`;
-            document.getElementById('modalEmail').href = `mailto:${CONFIG.email}?subject=طلب: ${p.name}&body=${msg}`;
-
-            document.getElementById('modal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-        }
-        document.getElementById('modal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        // =============================================
-        // FILE SCANNER
-        // =============================================
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const resultDiv = document.getElementById('scanResult');
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = '⏳ جاري الفحص...';
-
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                resultDiv.innerHTML = scanCode(ev.target.result, file.name);
-            };
-            reader.readAsText(file);
-        });
-
-        function scanCode(code, filename) {
-            const patterns = [
-                { r: /eval\s*\(/i, d: 'استخدام eval() — تنفيذ كود ديناميكي', s: 'عالي' },
-                { r: /document\.write\s*\(/i, d: 'document.write() — عرضة لـ XSS', s: 'عالي' },
-                { r: /innerHTML\s*=/i, d: 'innerHTML — عرضة لحقن XSS', s: 'متوسط' },
-                { r: /<script>/i, d: 'وسم <script> داخل المحتوى', s: 'عالي' },
-                { r: /exec\s*\(/i, d: 'exec() — تنفيذ أوامر', s: 'عالي' },
-                { r: /shell_exec/i, d: 'shell_exec — تنفيذ أوامر', s: 'عالي' },
-                { r: /system\s*\(/i, d: 'system() — تنفيذ أوامر', s: 'عالي' },
-                { r: /base64_decode/i, d: 'base64_decode — إخفاء كود', s: 'متوسط' },
-                { r: /\$_(GET|POST|REQUEST)/i, d: 'استخدام $_ مباشر — حقن', s: 'متوسط' },
-                { r: /include\s*\(?\s*\$_(GET|POST|REQUEST)/i, d: 'include مع مدخلات — LFI', s: 'عالي' },
-                { r: /DROP\s+TABLE/i, d: 'أمر DROP — خطر فقدان بيانات', s: 'خطير' },
-                { r: /UNION\s+SELECT/i, d: 'UNION SELECT — استخراج بيانات', s: 'خطير' },
-                { r: /onerror\s*=/i, d: 'onerror — XSS محتمل', s: 'متوسط' },
-                { r: /atob\s*\(/i, d: 'atob() — كود قد يكون مخفي', s: 'منخفض' },
-                { r: /(password|apiKey|secret|token)\s*[:=]\s*['"]/i, d: '⚠️ احتمال وجود مفتاح سري', s: 'خطير' },
-            ];
-
-            const found = patterns.filter(p => p.r.test(code));
-
-            if (found.length === 0) {
-                return `✅ <strong>الملف آمن</strong><br>📄 ${filename}<br>🟢 لا توجد ثغرات.`;
+        class Particle {
+            constructor() { this.reset();
+                this.y = Math.random() * canvas.height;
+                this.x = Math.random() * canvas.width; }
+            reset() {
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.6 + 0.1;
+                this.hue = Math.random() < 0.5 ? 220 : 260;
             }
-
-            const critical = found.filter(f => f.s === 'خطير').length;
-            const high = found.filter(f => f.s === 'عالي').length;
-            let risk = 'منخفض',
-                color = '#22c55e';
-            if (critical > 0) { risk = 'خطير';
-                color = '#ef4444'; } else if (high > 2) { risk = 'مرتفع';
-                color = '#f59e0b'; } else if (high > 0) { risk = 'متوسط';
-                color = '#f97316'; }
-
-            const items = found.map(f =>
-                `<li style="color:${f.s === 'خطير' ? '#ef4444' : f.s === 'عالي' ? '#f59e0b' : f.s === 'متوسط' ? '#f97316' : '#94a3b8'};margin-bottom:5px;">
-                            ⚠️ ${f.d} <span style="font-size:10px;background:${f.s === 'خطير' ? '#ef4444' : f.s === 'عالي' ? '#f59e0b' : '#3b82f6'};color:#fff;padding:2px 8px;border-radius:4px;">${f.s}</span>
-                        </li>`
-            ).join('');
-
-            return `
-                        <div style="border-right:4px solid ${color};padding-right:12px;">
-                            <strong>📄 ${filename}</strong><br>
-                            <span style="display:inline-block;background:${color};color:#fff;padding:3px 12px;border-radius:6px;font-weight:700;margin:6px 0;">
-                                ${risk}
-                            </span>
-                            <ul style="margin-top:10px;list-style:none;padding-right:0;">
-                                ${items}
-                            </ul>
-                            <p style="color:#64748b;font-size:12px;margin-top:12px;">
-                                💡 تواصل معي لفحص أعمق
-                            </p>
-                        </div>
-                    `;
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                const dx = mouse.x - this.x,
+                    dy = mouse.y - this.y,
+                    dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 150) { this.speedX += dx * 0.0002;
+                    this.speedY += dy * 0.0002; }
+                const maxSpeed = 1.2;
+                if (Math.abs(this.speedX) > maxSpeed) this.speedX = Math.sign(this.speedX) * maxSpeed;
+                if (Math.abs(this.speedY) > maxSpeed) this.speedY = Math.sign(this.speedY) * maxSpeed;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${this.hue}, 70%, 70%, ${this.opacity})`;
+                ctx.fill();
+            }
         }
 
-        // =============================================
-        // INIT
-        // =============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            renderCategories();
-            renderProducts(null);
+        for (let i = 0; i < 100; i++) particles.push(new Particle());
+
+        let connections = [];
+
+        function drawConnections() {
+            connections = [];
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x,
+                        dy = particles[i].y - particles[j].y,
+                        dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 140) {
+                        const alpha = (1 - dist / 140) * 0.25;
+                        connections.push({ x1: particles[i].x, y1: particles[i].y, x2: particles[j].x, y2: particles[j]
+                                .y, alpha });
+                    }
+                }
+            }
+            connections.forEach(c => {
+                ctx.beginPath();
+                ctx.moveTo(c.x1, c.y1);
+                ctx.lineTo(c.x2, c.y2);
+                ctx.strokeStyle = `rgba(96, 165, 250, ${c.alpha})`;
+                ctx.lineWidth = 0.6;
+                ctx.stroke();
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update();
+                p.draw(); });
+            drawConnections();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX;
+            mouse.y = e.clientY; });
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight; });
+
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCats();
+            setTimeout(animateCounters, 600);
         });
     </script>
 </body>
