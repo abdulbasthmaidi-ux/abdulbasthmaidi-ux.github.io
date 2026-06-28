@@ -852,4 +852,507 @@
         });
     </script>
 </body>
+    <style>
+/* ===================== BASCODE AI PANEL ===================== */
+#bascoeAiBtn {
+  position: fixed; bottom: 30px; left: 30px; z-index: 999999;
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  border: none; border-radius: 60px; padding: 16px 30px;
+  color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
+  font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.35);
+  transition: all 0.3s ease; display: flex; align-items: center; gap: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  pointer-events: auto !important;
+}
+#bascoeAiBtn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(139,92,246,0.45); }
+#bascoeAiBtn .pulse-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; display: inline-block; animation: basPulse 1.5s infinite; }
+@keyframes basPulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+#bascoeAiOverlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 999998; background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px); display: none;
+}
+
+#bascoeAiPanel {
+  position: fixed; bottom: 100px; left: 30px; z-index: 999999;
+  width: 380px; max-height: 560px;
+  background: #0b0f1e; backdrop-filter: blur(24px);
+  border: 1px solid rgba(139,92,246,0.15); border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+  display: none; flex-direction: column;
+}
+
+#bascoeAiPanel.open { display: flex; }
+#bascoeAiOverlay.open { display: block; }
+
+#bascoeAiPanel .ai-head {
+  padding: 18px 20px; border-bottom: 1px solid rgba(59,130,246,0.08);
+  display: flex; justify-content: space-between; align-items: center;
+}
+#bascoeAiPanel .ai-head h4 {
+  font-size: 15px; font-weight: 700; color: #e2e8f0;
+  display: flex; align-items: center; gap: 8px; margin: 0;
+}
+#bascoeAiPanel .ai-head h4 .badge-ai {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6); color: #fff;
+  font-size: 9px; padding: 2px 8px; border-radius: 50px; font-weight: 600;
+}
+#bascoeAiPanel .ai-head .ai-close-btn {
+  background: none; border: none; color: #64748b; font-size: 20px; cursor: pointer; padding: 4px 8px;
+}
+#bascoeAiPanel .ai-head .ai-close-btn:hover { color: #fff; }
+
+#bascoeAiMsgs {
+  flex: 1; padding: 16px; overflow-y: auto; max-height: 350px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+#bascoeAiMsgs::-webkit-scrollbar { width: 3px; }
+#bascoeAiMsgs::-webkit-scrollbar-track { background: transparent; }
+#bascoeAiMsgs::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+
+.bas-msg { max-width: 88%; padding: 12px 16px; border-radius: 16px; font-size: 13px; line-height: 1.8; }
+.bas-msg.bot { align-self: flex-start; background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.08); color: #e0e7ff; border-bottom-right-radius: 4px; }
+.bas-msg.user { align-self: flex-end; background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(139,92,246,0.18)); border: 1px solid rgba(139,92,246,0.12); color: #f0f0ff; border-bottom-left-radius: 4px; }
+.bas-msg .typing-dots { display: flex; gap: 5px; align-items: center; padding: 6px 0; }
+.bas-msg .typing-dots span { width: 7px; height: 7px; background: #60a5fa; border-radius: 50%; animation: basBounce 1s infinite; }
+.bas-msg .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.bas-msg .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes basBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+#bascoeAiPanel .ai-input-row {
+  padding: 12px 16px; border-top: 1px solid rgba(59,130,246,0.06);
+  display: flex; gap: 8px;
+}
+#bascoeAiPanel .ai-input-row input {
+  flex: 1; padding: 12px 16px; background: #05080f; border: 1px solid rgba(59,130,246,0.12);
+  border-radius: 12px; color: #e2e8f0; font-size: 13px; font-family: 'Cairo','Segoe UI',Tahoma,sans-serif;
+}
+#bascoeAiPanel .ai-input-row input:focus { outline: none; border-color: #8b5cf6; }
+#bascoeAiPanel .ai-input-row button {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6); border: none; border-radius: 12px;
+  padding: 12px 18px; color: #fff; font-size: 16px; cursor: pointer;
+}
+#bascoeAiPanel .ai-input-row button:hover { transform: scale(1.05); }
+#bascoeAiPanel .ai-input-row button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+#bascoeAiPanel .ai-suggest {
+  padding: 8px 16px 14px; display: flex; flex-wrap: wrap; gap: 6px;
+}
+#bascoeAiPanel .ai-suggest button {
+  background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.08);
+  border-radius: 50px; padding: 5px 14px; font-size: 11px;
+  color: #94a3b8; cursor: pointer; font-family: 'Cairo','Segoe UI',Tahoma,sans-serif;
+}
+#bascoeAiPanel .ai-suggest button:hover { border-color: #3b82f6; color: #60a5fa; background: rgba(59,130,246,0.08); }
+
+@media (max-width: 640px) {
+  #bascoeAiPanel { width: calc(100vw - 40px); left: 20px; bottom: 90px; max-height: 480px; }
+  #bascoeAiBtn { left: 20px; bottom: 20px; padding: 12px 20px; font-size: 13px; }
+}
+</style>
+
+<!-- ============ AI BUTTON ============ -->
+<button id="bascoeAiBtn">
+  <span class="pulse-dot"></span>
+  🧠 BASCODE AI
+</button>
+
+<!-- ============ OVERLAY ============ -->
+<div id="bascoeAiOverlay"></div>
+
+<!-- ============ AI PANEL ============ -->
+<div id="bascoeAiPanel">
+  <div class="ai-head">
+    <h4>
+      <span style="font-size:18px;">🧠</span> BASCODE AI
+      <span class="badge-ai">Bilingual</span>
+    </h4>
+    <button class="ai-close-btn" onclick="basToggleAI()">✕</button>
+  </div>
+
+  <div class="ai-msgs" id="bascoeAiMsgs">
+    <div class="bas-msg bot">
+      👋 <strong>Welcome to BASCODE!</strong><br><br>
+      I speak English & العربية 🇺🇸🇸🇦<br>
+      ✅ I'll suggest the best service<br>
+      ✅ Collect your details<br>
+      ✅ Send your order via email<br><br>
+      🎯 <strong>What do you need?</strong>
+    </div>
+  </div>
+
+  <div class="ai-suggest" id="bascoeAiSuggest">
+    <button onclick="basQuickAsk('I want an ecommerce website')">🛒 Ecommerce</button>
+    <button onclick="basQuickAsk('I need a mobile app')">📱 Mobile App</button>
+    <button onclick="basQuickAsk('How much for a logo?')">💲 Logo Price</button>
+    <button onclick="basQuickAsk('I need translation')">🌍 Translation</button>
+    <button onclick="basQuickAsk('أريد متجر إلكتروني')">🛒 متجر</button>
+    <button onclick="basQuickAsk('كم سعر شعار؟')">💲 شعار</button>
+  </div>
+
+  <div class="ai-input-row">
+    <input type="text" id="basAiInput" placeholder="Type in English or العربية..." onkeydown="if(event.key==='Enter') basSendMsg()">
+    <button id="basAiSendBtn" onclick="basSendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+// ==================== CONFIG ====================
+const BAS = {
+  email: 'abdulbasthmaidi@gmail.com'
+};
+
+// ==================== STATE ====================
+let BAS_STATE = {
+  step: 'idle',
+  service: null,
+  name: '',
+  email: '',
+  phone: '',
+  lang: 'en'
+};
+
+// ==================== LANGUAGE DETECTION ====================
+function basLang(text) {
+  const a = (text.match(/[\u0600-\u06FF\u0750-\u077F]/g) || []).length;
+  const t = text.replace(/\s/g, '').length;
+  if (t === 0) return 'en';
+  return (a / t) > 0.25 ? 'ar' : 'en';
+}
+
+function __(en, ar) {
+  return BAS_STATE.lang === 'ar' ? ar : en;
+}
+
+// ==================== TOGGLE AI ====================
+function basToggleAI() {
+  const panel = document.getElementById('bascoeAiPanel');
+  const overlay = document.getElementById('bascoeAiOverlay');
+  const btn = document.getElementById('bascoeAiBtn');
+  
+  if (panel.classList.contains('open')) {
+    panel.classList.remove('open');
+    overlay.classList.remove('open');
+    btn.innerHTML = '<span class="pulse-dot"></span> 🧠 BASCODE AI';
+  } else {
+    panel.classList.add('open');
+    overlay.classList.add('open');
+    btn.innerHTML = '<span class="pulse-dot"></span> ✕ Close AI';
+  }
+}
+
+// Button click handler
+document.getElementById('bascoeAiBtn').addEventListener('click', basToggleAI);
+document.getElementById('bascoeAiOverlay').addEventListener('click', basToggleAI);
+
+// ==================== QUICK ASK ====================
+function basQuickAsk(text) {
+  document.getElementById('basAiInput').value = text;
+  basSendMsg();
+}
+
+// ==================== SEND MESSAGE ====================
+async function basSendMsg() {
+  const input = document.getElementById('basAiInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  
+  input.value = '';
+  const btn = document.getElementById('basAiSendBtn');
+  btn.disabled = true;
+
+  // Detect language
+  BAS_STATE.lang = basLang(msg);
+
+  // Add user message
+  const msgs = document.getElementById('bascoeAiMsgs');
+  const userDiv = document.createElement('div');
+  userDiv.className = 'bas-msg user';
+  userDiv.textContent = msg;
+  msgs.appendChild(userDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Typing
+  const typing = document.createElement('div');
+  typing.className = 'bas-msg bot';
+  typing.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Generate response
+  const response = await basGenerateResponse(msg);
+
+  // Delay
+  await new Promise(r => setTimeout(r, 300 + Math.random() * 400));
+
+  // Remove typing
+  msgs.removeChild(typing);
+
+  // Add response
+  const botDiv = document.createElement('div');
+  botDiv.className = 'bas-msg bot';
+  botDiv.innerHTML = response.replace(/\n/g, '<br>');
+  msgs.appendChild(botDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  btn.disabled = false;
+  
+  if (BAS_STATE.step === 'done') BAS_STATE.step = 'idle';
+}
+
+// ==================== SERVICES DATA ====================
+const BAS_SERVICES = [
+  { name:'Business Website', nameAr:'موقع شركة', price:'$200', desc:'5 page responsive site', descAr:'موقع 5 صفحات متجاوب', cat:'Web', catAr:'مواقع', kw:['website','web','site','business','موقع','شركة'] },
+  { name:'Landing Page', nameAr:'صفحة هبوط', price:'$80', desc:'High-conversion page', descAr:'صفحة تسويقية', cat:'Web', catAr:'مواقع', kw:['landing','page','lead','هبوط','لاندينج'] },
+  { name:'Ecommerce Store', nameAr:'متجر إلكتروني', price:'$400', desc:'Full online store', descAr:'متجر كامل', cat:'Web', catAr:'مواقع', kw:['ecommerce','shop','store','متجر','بيع','منتجات'] },
+  { name:'Blog', nameAr:'مدونة', price:'$150', desc:'Blog with CMS', descAr:'مدونة متكاملة', cat:'Web', catAr:'مواقع', kw:['blog','articles','مدونة','مقالات'] },
+  { name:'Android App', nameAr:'تطبيق Android', price:'$600', desc:'Native Android app', descAr:'تطبيق أندرويد', cat:'Mobile', catAr:'تطبيقات', kw:['android','app','mobile','اندرويد','تطبيق'] },
+  { name:'iOS App', nameAr:'تطبيق iOS', price:'$700', desc:'Native iOS app', descAr:'تطبيق آيفون', cat:'Mobile', catAr:'تطبيقات', kw:['ios','iphone','apple','آيفون','ios app'] },
+  { name:'Flutter App', nameAr:'تطبيق Flutter', price:'$900', desc:'Android & iOS together', descAr:'منصتين معاً', cat:'Mobile', catAr:'تطبيقات', kw:['flutter','cross platform','mobile'] },
+  { name:'Logo Design', nameAr:'تصميم شعار', price:'$50', desc:'Unique brand logo', descAr:'شعار فريد', cat:'Design', catAr:'تصميم', kw:['logo','brand','شعار','لوجو'] },
+  { name:'Brand Identity', nameAr:'هوية بصرية', price:'$150', desc:'Full brand package', descAr:'هوية كاملة', cat:'Design', catAr:'تصميم', kw:['brand','identity','هوية','براند'] },
+  { name:'UI/UX Design', nameAr:'تصميم واجهات', price:'$200', desc:'User interface design', descAr:'تصميم واجهات', cat:'Design', catAr:'تصميم', kw:['ui','ux','interface','واجهات'] },
+  { name:'SEO Campaign', nameAr:'حملة SEO', price:'$250', desc:'Search engine optimization', descAr:'تحسين محركات', cat:'Marketing', catAr:'تسويق', kw:['seo','search','google','ظهور','جوجل'] },
+  { name:'Social Media Mgmt', nameAr:'إدارة سوشيال', price:'$350', desc:'Manage your social accounts', descAr:'إدارة حسابات', cat:'Marketing', catAr:'تسويق', kw:['social','instagram','facebook','سوشيال','انستغرام'] },
+  { name:'Google Ads', nameAr:'إعلانات Google', price:'$200', desc:'Search & display ads', descAr:'إعلانات جوجل', cat:'Marketing', catAr:'تسويق', kw:['google ads','ppc','اعلانات','جوجل ادز'] },
+  { name:'Node.js API', nameAr:'API Node.js', price:'$300', desc:'REST API with Express', descAr:'API مع Express', cat:'Backend', catAr:'باكتند', kw:['node','api','express','backend'] },
+  { name:'Laravel API', nameAr:'API Laravel', price:'$350', desc:'PHP API backend', descAr:'API بلغة PHP', cat:'Backend', catAr:'باكتند', kw:['laravel','php','backend'] },
+  { name:'Chatbot AI', nameAr:'Chatbot ذكي', price:'$250', desc:'AI chatbot', descAr:'بوت ذكي', cat:'AI', catAr:'ذكاء اصطناعي', kw:['chatbot','bot','chat','ai','بوت','محادثة'] },
+  { name:'NLP Processing', nameAr:'معالجة نصوص', price:'$400', desc:'Text analysis & NLP', descAr:'تحليل نصوص', cat:'AI', catAr:'ذكاء اصطناعي', kw:['nlp','text','نصوص','تحليل'] },
+  { name:'Penetration Test', nameAr:'اختبار اختراق', price:'$400', desc:'Full pentest + report', descAr:'اختراق شامل', cat:'Security', catAr:'أمن', kw:['pentest','hacking','security','اختراق','هكر'] },
+  { name:'Vulnerability Scan', nameAr:'فحص ثغرات', price:'$200', desc:'Security assessment', descAr:'فحص أمني', cat:'Security', catAr:'أمن', kw:['vulnerability','scan','ثغرات','فحص'] },
+  { name:'Shopify Store', nameAr:'متجر Shopify', price:'$350', desc:'Shopify setup & design', descAr:'تصميم Shopify', cat:'Ecommerce', catAr:'متاجر', kw:['shopify','shopify store'] },
+  { name:'WooCommerce', nameAr:'متجر WooCommerce', price:'$280', desc:'WordPress store', descAr:'متجر ووردبريس', cat:'Ecommerce', catAr:'متاجر', kw:['woocommerce','wordpress','ووردبريس'] },
+  { name:'Translation Docs', nameAr:'ترجمة مستندات', price:'$50', desc:'Document translation', descAr:'ترجمة مستندات', cat:'Translation', catAr:'ترجمة', kw:['translation','translate','document','pdf','ترجمة'] },
+  { name:'Website Translation', nameAr:'ترجمة مواقع', price:'$150', desc:'Full site translation', descAr:'ترجمة موقع كامل', cat:'Translation', catAr:'ترجمة', kw:['website translation','localize','ترجمة مواقع'] },
+  { name:'Power BI Dashboard', nameAr:'داشبورد Power BI', price:'$350', desc:'Interactive dashboard', descAr:'لوحة تحكم', cat:'Data', catAr:'بيانات', kw:['power bi','dashboard','داشبورد'] },
+  { name:'Excel Report', nameAr:'تقرير Excel', price:'$100', desc:'Advanced Excel report', descAr:'تقرير متقدم', cat:'Data', catAr:'بيانات', kw:['excel','spreadsheet','report','تقرير'] },
+  { name:'Tech Consultation', nameAr:'استشارة تقنية', price:'$80', desc:'1-on-1 consultation', descAr:'جلسة استشارية', cat:'Consulting', catAr:'استشارات', kw:['consultation','advice','استشارة','جلسة'] },
+  { name:'Code Review', nameAr:'مراجعة كود', price:'$120', desc:'Code quality audit', descAr:'تدقيق جودة', cat:'Consulting', catAr:'استشارات', kw:['code review','audit','مراجعة','كود'] },
+  { name:'Video Editing', nameAr:'مونتاج فيديو', price:'$100', desc:'Professional editing', descAr:'مونتاج احترافي', cat:'Production', catAr:'إنتاج', kw:['video','editing','مونتاج','فيديو'] },
+  { name:'Copywriting', nameAr:'كتابة محتوى', price:'$60', desc:'Professional copy', descAr:'كتابة تسويقية', cat:'Writing', catAr:'كتابة', kw:['copy','writing','content','كتابة','محتوى'] },
+  { name:'Web Hosting', nameAr:'استضافة', price:'$120/yr', desc:'Premium hosting', descAr:'استضافة عالية', cat:'Services', catAr:'خدمات', kw:['hosting','server','استضافة','host'] },
+  { name:'Domain Name', nameAr:'دومين', price:'$15/yr', desc:'Domain registration', descAr:'تسجيل نطاق', cat:'Services', catAr:'خدمات', kw:['domain','.com','دومين','نطاق'] },
+  { name:'WhatsApp Bot', nameAr:'بوت واتساب', price:'$200', desc:'WhatsApp automation', descAr:'بوت واتساب تفاعلي', cat:'AI', catAr:'ذكاء اصطناعي', kw:['whatsapp','whatsapp bot','واتساب','بوت'] },
+  { name:'Custom Dashboard', nameAr:'لوحة تحكم', price:'$300', desc:'Admin panel custom', descAr:'لوحة تحكم حسب الطلب', cat:'Web', catAr:'مواقع', kw:['dashboard','admin panel','لوحة تحكم','admin'] },
+];
+
+// ==================== FIND SERVICE ====================
+function basFindService(query) {
+  const q = query.toLowerCase().trim();
+  let best = null, bestScore = 0;
+
+  BAS_SERVICES.forEach(s => {
+    let score = 0;
+    const txt = (s.name + ' ' + s.desc + ' ' + s.cat).toLowerCase();
+    const txtAr = (s.nameAr + ' ' + s.descAr + ' ' + s.catAr).toLowerCase();
+    
+    s.kw.forEach(k => { if (q.includes(k.toLowerCase())) score += 10; });
+    
+    q.split(/\s+/).forEach(w => {
+      if (w.length > 2) {
+        if (txt.includes(w)) score += 5;
+        if (txtAr.includes(w)) score += 5;
+        if (s.name.toLowerCase().includes(w)) score += 7;
+        if (s.nameAr.toLowerCase().includes(w)) score += 7;
+      }
+    });
+
+    if (q.length > 3 && (txt.includes(q) || txtAr.includes(q))) score += 20;
+
+    if (score > bestScore) { bestScore = score; best = s; }
+  });
+
+  return { service: best, score: bestScore };
+}
+
+// ==================== GENERATE RESPONSE ====================
+async function basGenerateResponse(msg) {
+  const q = msg.trim();
+  const ql = q.toLowerCase().trim();
+  
+  // State: awaiting info
+  if (BAS_STATE.step === 'awaiting_info') {
+    let { name, email, phone } = BAS_STATE;
+    
+    if (!name) {
+      let c = ql.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '').trim();
+      c = c.replace(/[\d\s\+]{7,}/g, '').trim();
+      c = c.replace(/^(my name is|i am|i'm|اسمي|الاسم|انا)\s+/i, '').trim();
+      if (c.length > 1) name = c.charAt(0).toUpperCase() + c.slice(1);
+    }
+    
+    const em = ql.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+    if (em) email = em[0];
+    
+    const ph = ql.match(/(?:\+?966|0)?5\d{8}/);
+    if (ph) phone = ph[0];
+    else { const ap = ql.match(/\d{9,14}/); if (ap) phone = ap[0]; }
+    
+    BAS_STATE.name = name;
+    BAS_STATE.email = email;
+    BAS_STATE.phone = phone;
+    
+    const missing = [];
+    if (!name || name.length < 2) missing.push(__('Name', 'الاسم'));
+    if (!email) missing.push(__('Email', 'البريد'));
+    if (!phone) missing.push(__('Phone', 'الجوال'));
+    
+    if (missing.length > 0) {
+      return __(
+        `✅ Got: ${name||'?'} | ${email||'?'} | ${phone||'?'}\n\n❌ Missing: ${missing.join(', ')}\n\n📝 Please send the rest.`,
+        `✅ تم: ${name||'?'} | ${email||'?'} | ${phone||'?'}\n\n❌ المتبقي: ${missing.join('، ')}\n\n📝 أرسل الباقي.`
+      );
+    }
+    
+    return basSendOrder();
+  }
+  
+  // State: awaiting confirmation
+  if (BAS_STATE.step === 'awaiting_confirm') {
+    if (/^(yes|نعم|ok|sure|yeah|اي|تم|طيب|خلاص|موافق|y)/i.test(ql)) {
+      BAS_STATE.step = 'awaiting_info';
+      BAS_STATE.name = '';
+      BAS_STATE.email = '';
+      BAS_STATE.phone = '';
+      return __(
+        `✅ Great! You want **${BAS_STATE.service.name}** - ${BAS_STATE.service.price}\n\n📋 Please send me:\n1️⃣ Your full name\n2️⃣ Your email\n3️⃣ Your phone number\n\nYou can send all at once!`,
+        `✅ تم التأكيد! طلب **${BAS_STATE.service.nameAr}** - ${BAS_STATE.service.price}\n\n📋 أرسل بياناتك:\n1️⃣ الاسم الكامل\n2️⃣ البريد الإلكتروني\n3️⃣ رقم الجوال\n\nتقدر ترسلهم مرة وحدة!`
+      );
+    } else {
+      BAS_STATE.step = 'idle';
+      BAS_STATE.service = null;
+      return __('👌 No problem! Tell me what you need.', '👌 لا مشكلة! أخبرني ماذا تريد.');
+    }
+  }
+  
+  // Greetings
+  if (/^(hello|hi|مرحبا|اهلا|السلام|hey)/i.test(ql)) {
+    return __(
+      '👋 Welcome to BASCODE! I\'m your AI assistant.\n\nI can help you find the right service, collect your details, and send your order.\n\n🎯 What do you need?',
+      '👋 أهلاً بك في BASCODE! أنا مساعدك الذكي.\n\nأساعدك في اختيار الخدمة، أخذ بياناتك، وإرسال الطلب.\n\n🎯 ماذا تريد؟'
+    );
+  }
+  
+  // Thanks
+  if (/^(thanks|thank|شكرا|تسلم)/i.test(ql)) {
+    return __('😊 You\'re welcome! Let me know if you need anything else.', '😊 العفو! أخبرني إذا احتجت شيئاً آخر.');
+  }
+  
+  // Price query
+  if (/سعر|كم|price|how much|pricing|تكلفة|بكم/i.test(ql)) {
+    const r = basFindService(q);
+    if (r.service && r.score >= 4) {
+      return __(
+        `💰 **${r.service.name}** - ${r.service.price}\n📂 ${r.service.cat}\n📝 ${r.service.desc}\n\nTo order, type "I want ${r.service.name}"`,
+        `💰 **${r.service.nameAr}** - ${r.service.price}\n📂 ${r.service.catAr}\n📝 ${r.service.descAr}\n\nللطلب اكتب "أريد ${r.service.nameAr}"`
+      );
+    }
+    return __(
+      '💰 Prices:\n🌐 Websites: $80-$400\n📱 Apps: $600-$900\n🎨 Design: $30-$200\n📢 Marketing: $200-$350\n🤖 AI: $250-$500\n🔒 Security: $200-$400\n🌍 Translation: $50-$150\n📊 Data: $100-$350\n\nType the service name for details.',
+      '💰 الأسعار:\n🌐 مواقع: $80-$400\n📱 تطبيقات: $600-$900\n🎨 تصميم: $30-$200\n📢 تسويق: $200-$350\n🤖 AI: $250-$500\n🔒 أمن: $200-$400\n🌍 ترجمة: $50-$150\n📊 بيانات: $100-$350\n\nاكتب اسم الخدمة.'
+    );
+  }
+  
+  // Direct order patterns
+  if (/^(i want|i need|i would like|أريد|اريد|احتاج|أطلب|اطلب|طلب|شراء|ابي|ابغى)/i.test(ql)) {
+    const r = basFindService(q);
+    if (r.service && r.score >= 8) {
+      BAS_STATE.service = r.service;
+      BAS_STATE.step = 'awaiting_confirm';
+      return __(
+        `🎯 **Found it!**\n\n📌 ${r.service.name} - ${r.service.price}\n📂 ${r.service.cat}\n📝 ${r.service.desc}\n\n✅ Type "yes" to confirm.`,
+        `🎯 **وجدتها!**\n\n📌 ${r.service.nameAr} - ${r.service.price}\n📂 ${r.service.catAr}\n📝 ${r.service.descAr}\n\n✅ اكتب "نعم" للتأكيد.`
+      );
+    }
+    if (r.service && r.score >= 4) {
+      return __(
+        `🤔 Did you mean **${r.service.name}** (${r.service.price})?\n\nType "yes" or describe more.`,
+        `🤔 هل تقصد **${r.service.nameAr}** (${r.service.price})؟\n\nاكتب "نعم" أو وصف أكثر.`
+      );
+    }
+    return __(
+      '👌 Tell me more details:\n• "I want an ecommerce store for clothes"\n• "I need a food delivery app"\n• Type what you need!',
+      '👌 وضح أكثر:\n• "أريد متجر إلكتروني لبيع الملابس"\n• "أحتاج تطبيق توصيل طلبات"\n• اكتب احتياجك!'
+    );
+  }
+  
+  // Category detection
+  const cats = [
+    { kw:'web|site|website|موقع|ويب|صفحة', replyEn:'🌐 **Web Services:**\n• Business Website $200\n• Landing Page $80\n• Ecommerce $400\n• Blog $150\n\nWhich one?', replyAr:'🌐 **خدمات المواقع:**\n• موقع شركة $200\n• صفحة هبوط $80\n• متجر $400\n• مدونة $150\n\nاختر؟' },
+    { kw:'app|mobile|تطبيق|جوال|موبايل', replyEn:'📱 **Mobile Apps:**\n• Android $600\n• iOS $700\n• Flutter $900\n\nWhich platform?', replyAr:'📱 **التطبيقات:**\n• Android $600\n• iOS $700\n• Flutter $900\n\nأي نظام؟' },
+    { kw:'design|logo|شعار|تصميم|هوية|جرافيك', replyEn:'🎨 **Design:**\n• Logo $50\n• Brand Identity $150\n• UI/UX $200\n\nChoose:', replyAr:'🎨 **التصميم:**\n• شعار $50\n• هوية $150\n• واجهات $200\n\nاختر:' },
+    { kw:'seo|marketing|تسويق|سوشيال|اعلان', replyEn:'📢 **Marketing:**\n• SEO $250\n• Social Media $350\n• Google Ads $200\n\nWhich?', replyAr:'📢 **التسويق:**\n• SEO $250\n• سوشيال $350\n• إعلانات $200\n\nاختر؟' },
+    { kw:'security|hack|pentest|امن|اختراق|ثغرات', replyEn:'🔒 **Security:**\n• Pentest $400\n• Vulnerability Scan $200\n\nWhich?', replyAr:'🔒 **الأمن:**\n• اختبار اختراق $400\n• فحص ثغرات $200\n\nاختر؟' },
+    { kw:'translation|ترجمة|translate', replyEn:'🌍 **Translation:**\n• Documents $50\n• Websites $150\n\nChoose:', replyAr:'🌍 **الترجمة:**\n• مستندات $50\n• مواقع $150\n\nاختر؟' },
+  ];
+  
+  for (const c of cats) {
+    const re = new RegExp(c.kw, 'i');
+    if (re.test(ql)) return __(c.replyEn, c.replyAr);
+  }
+  
+  // High match
+  const r = basFindService(q);
+  if (r.service && r.score >= 7) {
+    BAS_STATE.service = r.service;
+    BAS_STATE.step = 'awaiting_confirm';
+    return __(
+      `🎯 **I recommend:**\n\n📌 ${r.service.name} - ${r.service.price}\n📂 ${r.service.cat}\n📝 ${r.service.desc}\n\n✅ Type "yes" to order.`,
+      `🎯 **أنصحك بـ:**\n\n📌 ${r.service.nameAr} - ${r.service.price}\n📂 ${r.service.catAr}\n📝 ${r.service.descAr}\n\n✅ اكتب "نعم" للطلب.`
+    );
+  }
+  
+  // Default
+  return __(
+    'Welcome to **BASCODE**! 😊\n\nI have many digital services:\n🌐 Websites\n📱 Mobile Apps\n🎨 Design\n📢 Marketing\n🤖 AI\n🔒 Security\n🌍 Translation\n📊 Data Analysis\n💡 Consulting\n🛒 Ecommerce\n\n✍️ **Type what you need!**',
+    'أهلاً في **BASCODE**! 😊\n\nعندي خدمات رقمية متنوعة:\n🌐 مواقع\n📱 تطبيقات\n🎨 تصميم\n📢 تسويق\n🤖 ذكاء اصطناعي\n🔒 أمن\n🌍 ترجمة\n📊 بيانات\n💡 استشارات\n🛒 متاجر\n\n✍️ **اكتب احتياجك!**'
+  );
+}
+
+// ==================== SEND ORDER EMAIL ====================
+function basSendOrder() {
+  const svc = BAS_STATE.service;
+  const sub = encodeURIComponent(`🔔 New Order from BASCODE: ${svc.name}`);
+  const body = encodeURIComponent(
+    `🔔 NEW ORDER - BASCODE AI\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+    `📌 Service: ${svc.name}\n` +
+    `💰 Price: ${svc.price}\n` +
+    `📂 Category: ${svc.cat}\n` +
+    `📝 Description: ${svc.desc}\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+    `👤 CLIENT INFO:\n` +
+    `━━━━━━━━━━━━━━━\n` +
+    `👤 Name: ${BAS_STATE.name}\n` +
+    `📧 Email: ${BAS_STATE.email}\n` +
+    `📞 Phone: ${BAS_STATE.phone}\n` +
+    `━━━━━━━━━━━━━━━\n\n` +
+    `📅 Date: ${new Date().toLocaleDateString('en-US')}\n` +
+    `⏰ Time: ${new Date().toLocaleTimeString('en-US')}\n\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━\n` +
+    `Sent via BASCODE AI Assistant`
+  );
+  
+  window.open(`mailto:${BAS.email}?subject=${sub}&body=${body}`, '_blank');
+  
+  const svcName = svc.name;
+  const svcNameAr = svc.nameAr;
+  BAS_STATE.step = 'done';
+  BAS_STATE.service = null;
+  const n = BAS_STATE.name;
+  const e = BAS_STATE.email;
+  const p = BAS_STATE.phone;
+  BAS_STATE.name = '';
+  BAS_STATE.email = '';
+  BAS_STATE.phone = '';
+  
+  return __(
+    `✅ **Order sent successfully!** 🎉\n\n📌 Service: ${svcName}\n👤 Name: ${n}\n📧 Email: ${e}\n📞 Phone: ${p}\n\n📬 Sent to management.\nThey will contact you soon!\n\n📋 Need another service? Just ask!`,
+    `✅ **تم إرسال الطلب!** 🎉\n\n📌 الخدمة: ${svcNameAr}\n👤 الاسم: ${n}\n📧 البريد: ${e}\n📞 الجوال: ${p}\n\n📬 أُرسل للإدارة.\nسيتواصلون معك قريباً!\n\n📋 تريد خدمة أخرى؟ فقط اطلب!`
+  );
+}
+</script>
 </html>
