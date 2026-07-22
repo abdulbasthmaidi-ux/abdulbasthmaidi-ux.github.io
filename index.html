@@ -1372,7 +1372,7 @@ function sendAIMsg(){
         setTimeout(() => {
           const subj = `[BASCODE AI ORDER] ${t(aiState.svc.titleAr, aiState.svc.titleEn)} - ${aiState.name}`;
           const body = `${'='.repeat(40)}\n>>> AI ORDER <<<\n${'='.repeat(40)}\nDate: ${new Date().toLocaleString()}\nSource: BASCODE AI Assistant\n\n--- SERVICE ---\nService: ${t(aiState.svc.titleAr, aiState.svc.titleEn)}\nTemplate: ${t(aiState.tpl.nameAr, aiState.tpl.nameEn)}\nAddons: ${aiState.opts.map(o=>t(o.nameAr,o.nameEn)).join(', ')}\nTotal: $${total}\n\n--- CLIENT ---\nName: ${aiState.name}\nPhone: ${aiState.phone}\nEmail: ${aiState.email}\n\n${'='.repeat(40)}`;
-          window.location.href = `mailto:abdulbasthmaidi@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+          window.location.href = `mailto:bascode87@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
           
           addAIMsg(`✅ <strong>تم إرسال طلبك!</strong> 🎉<br>سيتم التواصل معك خلال 24 ساعة.<br><br>شكراً لاختيارك <strong>BASCODE</strong> 🙏`);
           
