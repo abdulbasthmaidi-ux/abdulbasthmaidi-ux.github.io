@@ -1209,7 +1209,7 @@ function submitOrder(){
   const data={service:t(curSvc.titleAr,curSvc.titleEn),template:t(selTpl.nameAr,selTpl.nameEn),addons:selOpts.map(o=>t(o.nameAr,o.nameEn)).join(', '),total:'$'+total,name,phone,email,notes:notes||t('لا يوجد','None'),date:new Date().toISOString()};
   const subj=`[BASCODE NEW ORDER] ${data.service} - ${name}`;
   const body=`${'='.repeat(40)}\n>>> NEW ORDER <<<\n${'='.repeat(40)}\nDate: ${new Date().toLocaleString()}\n\n--- SERVICE ---\nService: ${data.service}\nTemplate: ${data.template}\nAddons: ${data.addons}\nTotal: ${data.total}\n\n--- CLIENT ---\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\nNotes: ${data.notes}\n\n${'='.repeat(40)}`;
-  window.location.href=`mailto:abdulbasthmaidi@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+  window.location.href=`mailto:bascode84@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
   const orders=JSON.parse(localStorage.getItem('bascode_orders')||'[]');orders.push(data);localStorage.setItem('bascode_orders',JSON.stringify(orders));
   closeSvc();document.getElementById('okModal').classList.add('active');document.getElementById('clientForm').reset();
 }
@@ -1372,7 +1372,7 @@ function sendAIMsg(){
         setTimeout(() => {
           const subj = `[BASCODE AI ORDER] ${t(aiState.svc.titleAr, aiState.svc.titleEn)} - ${aiState.name}`;
           const body = `${'='.repeat(40)}\n>>> AI ORDER <<<\n${'='.repeat(40)}\nDate: ${new Date().toLocaleString()}\nSource: BASCODE AI Assistant\n\n--- SERVICE ---\nService: ${t(aiState.svc.titleAr, aiState.svc.titleEn)}\nTemplate: ${t(aiState.tpl.nameAr, aiState.tpl.nameEn)}\nAddons: ${aiState.opts.map(o=>t(o.nameAr,o.nameEn)).join(', ')}\nTotal: $${total}\n\n--- CLIENT ---\nName: ${aiState.name}\nPhone: ${aiState.phone}\nEmail: ${aiState.email}\n\n${'='.repeat(40)}`;
-          window.location.href = `mailto:abdulbasthmaidi@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+          window.location.href = `mailto:bascode84@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
           
           addAIMsg(`✅ <strong>تم إرسال طلبك!</strong> 🎉<br>سيتم التواصل معك خلال 24 ساعة.<br><br>شكراً لاختيارك <strong>BASCODE</strong> 🙏`);
           
